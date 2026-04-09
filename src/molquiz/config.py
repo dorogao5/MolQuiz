@@ -28,11 +28,11 @@ class Settings(BaseSettings):
     telegram_parse_mode: str = "HTML"
     telegram_reuse_file_ids: bool = True
 
-    database_url: str = "postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz"
-    redis_url: str = "redis://redis:6379/0"
+    database_url: str = "postgresql+asyncpg://molquiz:molquiz@localhost:15432/molquiz"
+    redis_url: str = "redis://localhost:16379/0"
     session_ttl_seconds: int = 60 * 60 * 12
 
-    opsin_base_url: str = "http://opsin:8080"
+    opsin_base_url: str = "http://localhost:18080"
     pubchem_base_url: str = "https://pubchem.ncbi.nlm.nih.gov/rest/pug"
     pubchem_batch_size: int = 100
 

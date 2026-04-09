@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: molquiz
       POSTGRES_PASSWORD: molquiz
     ports:
-      - "5432:5432"
+      - "127.0.0.1:${MOLQUIZ_POSTGRES_HOST_PORT:-15432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -18,7 +18,7 @@ services:
   redis:
     image: redis:7-bookworm
     ports:
-      - "6379:6379"
+      - "127.0.0.1:${MOLQUIZ_REDIS_HOST_PORT:-16379}:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -31,7 +31,7 @@ services:
     build:
       context: ./docker/opsin
     ports:
-      - "8080:8080"
+      - "127.0.0.1:${MOLQUIZ_OPSIN_HOST_PORT:-18080}:8080"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 15s

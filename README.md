@@ -42,6 +42,9 @@ uv sync --extra dev
 docker compose up -d postgres redis opsin
 ```
 
+По умолчанию сервисы публикуются только на `localhost` и на портах `15432`, `16379` и `18080`, чтобы не конфликтовать с уже установленными на машине `PostgreSQL`/`Redis`.
+Если и эти порты заняты, переопредели `MOLQUIZ_POSTGRES_HOST_PORT`, `MOLQUIZ_REDIS_HOST_PORT` и `MOLQUIZ_OPSIN_HOST_PORT` в `.env` перед запуском.
+
 3. Применить миграции:
 
 ```bash
@@ -73,6 +76,7 @@ docker compose exec bot uv run molquiz-seed-rational --path data/rational_curate
 ```
 
 В этом режиме бот работает через polling. Никакие `MOLQUIZ_TELEGRAM_WEBHOOK_SECRET` и `MOLQUIZ_TELEGRAM_WEBHOOK_BASE_URL` не нужны.
+`postgres`, `redis` и `opsin` внутри compose по-прежнему доступны как сервисы `postgres:5432`, `redis:6379` и `opsin:8080`, а на хост публикуются только на `localhost` и нестандартных портах из `.env.example`.
 
 Если зачем-то нужен именно webhook, тогда уже отдельный production-профиль:
 
