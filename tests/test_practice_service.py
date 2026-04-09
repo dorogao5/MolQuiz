@@ -22,7 +22,7 @@ async def test_practice_service_issue_and_answer_card(session_factory, tmp_path:
     content_service = ContentService(
         session_factory,
         depiction_service,
-        QwenHeadlessClient(None, None),
+        QwenHeadlessClient(None),
     )
     practice_service = PracticeService(
         session_factory,

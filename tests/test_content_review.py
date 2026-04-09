@@ -16,7 +16,7 @@ async def test_pubchem_review_cycle_publishes_card_after_ru_approval(session_fac
     content_service = ContentService(
         session_factory,
         depiction_service,
-        QwenHeadlessClient(None, None),
+        QwenHeadlessClient(None),
     )
 
     imported = await content_service.import_pubchem_compounds(

@@ -91,6 +91,12 @@ MOLQUIZ_DOMAIN=your.domain.tld docker compose --profile prod up --build -d
 
 Webhook-переменные нужны только для режима `prod` с `molquiz-web`.
 
+Если хочешь использовать Qwen для офлайн-подсказок на review, можно добавить:
+
+- `MOLQUIZ_QWEN_COMMAND=qwen`
+
+Это не API и не отдельный endpoint. Воркер просто вызывает локальную команду `qwen -p ...`. Соответственно, `qwen` должен быть установлен и уже авторизован на этой машине.
+
 ## Полезные команды
 
 Запуск polling-бота:

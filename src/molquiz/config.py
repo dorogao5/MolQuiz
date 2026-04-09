@@ -37,8 +37,7 @@ class Settings(BaseSettings):
     pubchem_batch_size: int = 100
 
     storage_dir: Path = Path("storage")
-    qwen_base_url: str | None = None
-    qwen_oauth_token: SecretStr | None = None
+    qwen_command: str | None = None
 
     auto_create_schema: bool = False
     metrics_enabled: bool = True

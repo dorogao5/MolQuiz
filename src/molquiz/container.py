@@ -61,8 +61,7 @@ async def create_application_context(settings: Settings) -> ApplicationContext:
         timeout=settings.request_timeout_seconds,
     )
     qwen_client = QwenHeadlessClient(
-        settings.qwen_base_url,
-        settings.qwen_oauth_token.get_secret_value() if settings.qwen_oauth_token else None,
+        settings.qwen_command,
         timeout=settings.request_timeout_seconds,
     )
     depiction_service = DepictionService(settings.storage_dir)
