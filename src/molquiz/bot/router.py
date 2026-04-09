@@ -39,12 +39,22 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
     @router.message(F.text == "Новая молекула")
     async def new_card(message: Message) -> None:
         await app_context.practice_service.ensure_user(message.from_user)
-        await _send_new_card(message, repeat_errors=False)
+        await _send_new_card(
+            app_context=app_context,
+            message=message,
+            telegram_user_id=message.from_user.id,
+            repeat_errors=False,
+        )
 
     @router.message(F.text == "Повторить ошибки")
     async def repeat_errors(message: Message) -> None:
         await app_context.practice_service.ensure_user(message.from_user)
-        await _send_new_card(message, repeat_errors=True)
+        await _send_new_card(
+            app_context=app_context,
+            message=message,
+            telegram_user_id=message.from_user.id,
+            repeat_errors=True,
+        )
 
     @router.message(F.text == "Подсказка")
     async def hint(message: Message) -> None:
@@ -168,7 +178,12 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
     @router.callback_query(F.data == "card:next")
     async def next_callback(callback: CallbackQuery) -> None:
         await app_context.practice_service.ensure_user(callback.from_user)
-        await _send_new_card(callback.message, repeat_errors=False)
+        await _send_new_card(
+            app_context=app_context,
+            message=callback.message,
+            telegram_user_id=callback.from_user.id,
+            repeat_errors=False,
+        )
         await callback.answer()
 
     @router.message(F.text)
@@ -198,39 +213,46 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
             reply_markup=card_actions_keyboard(),
         )
 
-    async def _send_new_card(message: Message, *, repeat_errors: bool) -> None:
-        practice_card = await app_context.practice_service.issue_card(
-            message.from_user.id,
-            repeat_errors=repeat_errors,
-        )
-        if practice_card is None:
-            await message.answer("Подходящих карточек пока нет. Сначала загрузи контент или ослабь фильтры.")
-            return
-
-        cards_issued_total.labels(
-            mode=practice_card.card.mode,
-            repeat_errors=str(repeat_errors).lower(),
-        ).inc()
-        caption = (
-            f"Режим: <b>{'IUPAC' if practice_card.card.mode == Mode.IUPAC.value else 'Рациональная'}</b>\n"
-            f"Сложность: <b>{practice_card.card.difficulty}</b>\n"
-            "Напиши название молекулы в чат."
-        )
-        sent_message = await _send_depiction(
-            bot=message.bot,
-            message=message,
-            practice_card=practice_card,
-            caption=caption,
-        )
-        if sent_message.photo:
-            await app_context.practice_service.remember_telegram_file_id(
-                practice_card.depiction.id,
-                sent_message.photo[-1].file_id,
-            )
-
     dispatcher = Dispatcher()
     dispatcher.include_router(router)
     return dispatcher
+
+
+async def _send_new_card(
+    *,
+    app_context: ApplicationContext,
+    message: Message,
+    telegram_user_id: int,
+    repeat_errors: bool,
+) -> None:
+    practice_card = await app_context.practice_service.issue_card(
+        telegram_user_id,
+        repeat_errors=repeat_errors,
+    )
+    if practice_card is None:
+        await message.answer("Подходящих карточек пока нет. Сначала загрузи контент или ослабь фильтры.")
+        return
+
+    cards_issued_total.labels(
+        mode=practice_card.card.mode,
+        repeat_errors=str(repeat_errors).lower(),
+    ).inc()
+    caption = (
+        f"Режим: <b>{'IUPAC' if practice_card.card.mode == Mode.IUPAC.value else 'Рациональная'}</b>\n"
+        f"Сложность: <b>{practice_card.card.difficulty}</b>\n"
+        "Напиши название молекулы в чат."
+    )
+    sent_message = await _send_depiction(
+        bot=message.bot,
+        message=message,
+        practice_card=practice_card,
+        caption=caption,
+    )
+    if sent_message.photo:
+        await app_context.practice_service.remember_telegram_file_id(
+            practice_card.depiction.id,
+            sent_message.photo[-1].file_id,
+        )
 
 
 async def _send_depiction(*, bot: Bot, message: Message, practice_card, caption: str) -> Message:
