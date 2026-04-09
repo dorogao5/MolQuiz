@@ -8,7 +8,12 @@ ENV UV_LINK_MODE=copy \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    libcairo2 \
+    libexpat1 \
+    libfontconfig1 \
+    libfreetype6 \
     libglib2.0-0 \
+    libpng16-16 \
     libsm6 \
     libxext6 \
     libxrender1 \
@@ -31,7 +36,12 @@ FROM python:3.12-slim-bookworm AS runtime
 COPY --from=ghcr.io/astral-sh/uv:0.8.9 /uv /uvx /bin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    libcairo2 \
+    libexpat1 \
+    libfontconfig1 \
+    libfreetype6 \
     libglib2.0-0 \
+    libpng16-16 \
     libsm6 \
     libxext6 \
     libxrender1 \
