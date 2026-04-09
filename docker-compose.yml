@@ -38,6 +38,19 @@ services:
       timeout: 5s
       retries: 5
 
+  migrate:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
+      MOLQUIZ_ENVIRONMENT: production
+    command: ["uv", "run", "alembic", "upgrade", "head"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   bot:
     build:
       context: .
@@ -50,15 +63,14 @@ services:
       MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
       MOLQUIZ_STORAGE_DIR: /app/storage
       MOLQUIZ_ENVIRONMENT: production
-      MOLQUIZ_AUTO_CREATE_SCHEMA: "true"
     command: ["uv", "run", "molquiz-dev"]
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
       opsin:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     volumes:
       - storage_data:/app/storage
 
@@ -75,15 +87,14 @@ services:
       MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
       MOLQUIZ_STORAGE_DIR: /app/storage
       MOLQUIZ_ENVIRONMENT: production
-      MOLQUIZ_AUTO_CREATE_SCHEMA: "true"
     command: ["uv", "run", "molquiz-web"]
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
       opsin:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     expose:
       - "8081"
     volumes:
@@ -101,15 +112,14 @@ services:
       MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
       MOLQUIZ_STORAGE_DIR: /app/storage
       MOLQUIZ_ENVIRONMENT: production
-      MOLQUIZ_AUTO_CREATE_SCHEMA: "true"
     command: ["uv", "run", "molquiz-worker"]
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
       opsin:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     volumes:
       - storage_data:/app/storage
 
