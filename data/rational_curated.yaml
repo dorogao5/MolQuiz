@@ -1,26 +1,638 @@
 entries:
-  - canonical_smiles: CC(Cl)C
-    source_ref: curated_rational
-    names:
-      rational:
-        en:
-          - isopropyl chloride
-        ru:
-          - изопропилхлорид
-  - canonical_smiles: CC(C)(C)Cl
-    source_ref: curated_rational
-    names:
-      rational:
-        en:
-          - tert-butyl chloride
-        ru:
-          - трет-бутилхлорид
-  - canonical_smiles: CC(C)(C)CO
-    source_ref: curated_rational
-    names:
-      rational:
-        en:
-          - neopentyl alcohol
-        ru:
-          - неопентиловый спирт
-
+- canonical_smiles: CC(C)C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isobutane
+      ru:
+      - изобутан
+- canonical_smiles: CC(C)(C)C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - neopentane
+      ru:
+      - неопентан
+- canonical_smiles: CC(C)Cl
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isopropyl chloride
+      ru:
+      - изопропилхлорид
+- canonical_smiles: CC(C)CCl
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isobutyl chloride
+      ru:
+      - изобутилхлорид
+- canonical_smiles: CCC(C)Cl
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - sec-butyl chloride
+      ru:
+      - сек-бутилхлорид
+- canonical_smiles: CC(C)(C)Cl
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - tert-butyl chloride
+      - t-butyl chloride
+      ru:
+      - трет-бутилхлорид
+- canonical_smiles: CC(C)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isopropyl alcohol
+      - isopropanol
+      ru:
+      - изопропиловый спирт
+      - изопропанол
+- canonical_smiles: CC(C)CO
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isobutyl alcohol
+      - isobutanol
+      ru:
+      - изобутиловый спирт
+      - изобутанол
+- canonical_smiles: CCC(C)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - sec-butyl alcohol
+      - sec-butanol
+      ru:
+      - сек-бутиловый спирт
+      - сек-бутанол
+- canonical_smiles: CC(C)(C)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - tert-butyl alcohol
+      - tert-butanol
+      - t-butanol
+      ru:
+      - трет-бутиловый спирт
+      - трет-бутанол
+- canonical_smiles: CC(C)CCO
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isoamyl alcohol
+      - isopentyl alcohol
+      ru:
+      - изоамиловый спирт
+      - изопентиловый спирт
+- canonical_smiles: CC(C)(C)CO
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - neopentyl alcohol
+      ru:
+      - неопентиловый спирт
+- canonical_smiles: COC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - dimethyl ether
+      ru:
+      - диметиловый эфир
+- canonical_smiles: CCOCC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - diethyl ether
+      - ethyl ether
+      ru:
+      - диэтиловый эфир
+      - этиловый эфир
+- canonical_smiles: CCCOC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl propyl ether
+      ru:
+      - метилпропиловый эфир
+- canonical_smiles: COC(C)C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl isopropyl ether
+      ru:
+      - метилизопропиловый эфир
+- canonical_smiles: CC(C)OC(C)C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - diisopropyl ether
+      ru:
+      - диизопропиловый эфир
+- canonical_smiles: C=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - formaldehyde
+      ru:
+      - формальдегид
+- canonical_smiles: CC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - acetaldehyde
+      ru:
+      - ацетальдегид
+- canonical_smiles: CCC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - propionaldehyde
+      ru:
+      - пропиональдегид
+- canonical_smiles: CCCC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - n-butyraldehyde
+      - butyraldehyde
+      ru:
+      - н-масляный альдегид
+      - масляный альдегид
+- canonical_smiles: CC(C)C=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isobutyraldehyde
+      ru:
+      - изомасляный альдегид
+- canonical_smiles: CCCCC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - valeraldehyde
+      ru:
+      - валериановый альдегид
+- canonical_smiles: CC(C)CC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isovaleraldehyde
+      ru:
+      - изовалериановый альдегид
+- canonical_smiles: O=Cc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - benzaldehyde
+      ru:
+      - бензальдегид
+- canonical_smiles: CC(C)=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - acetone
+      - dimethyl ketone
+      ru:
+      - ацетон
+      - диметилкетон
+- canonical_smiles: CCC(C)=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl ethyl ketone
+      - MEK
+      ru:
+      - метилэтилкетон
+- canonical_smiles: CCC(=O)CC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - diethyl ketone
+      ru:
+      - диэтилкетон
+- canonical_smiles: CCCC(C)=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl propyl ketone
+      ru:
+      - метилпропилкетон
+- canonical_smiles: CC(=O)CC(C)C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl isobutyl ketone
+      - MIBK
+      ru:
+      - метилизобутилкетон
+- canonical_smiles: CC(=O)c1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - acetophenone
+      ru:
+      - ацетофенон
+- canonical_smiles: O=C(c1ccccc1)c1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - benzophenone
+      ru:
+      - бензофенон
+- canonical_smiles: O=CO
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - formic acid
+      ru:
+      - муравьиная кислота
+- canonical_smiles: CC(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - acetic acid
+      ru:
+      - уксусная кислота
+- canonical_smiles: CCC(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - propionic acid
+      ru:
+      - пропионовая кислота
+- canonical_smiles: CCCC(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - n-butyric acid
+      - butyric acid
+      ru:
+      - н-масляная кислота
+      - масляная кислота
+- canonical_smiles: CC(C)C(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isobutyric acid
+      ru:
+      - изомасляная кислота
+- canonical_smiles: CCCCC(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - valeric acid
+      ru:
+      - валериановая кислота
+- canonical_smiles: CC(C)CC(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isovaleric acid
+      ru:
+      - изовалериановая кислота
+- canonical_smiles: CCCCCC(=O)O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - caproic acid
+      ru:
+      - капроновая кислота
+- canonical_smiles: O=C(O)c1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - benzoic acid
+      ru:
+      - бензойная кислота
+- canonical_smiles: COC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl formate
+      ru:
+      - метилформиат
+- canonical_smiles: CCOC=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - ethyl formate
+      ru:
+      - этилформиат
+- canonical_smiles: COC(C)=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl acetate
+      ru:
+      - метилацетат
+- canonical_smiles: CCOC(C)=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - ethyl acetate
+      ru:
+      - этилацетат
+- canonical_smiles: CCC(=O)OC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl propionate
+      ru:
+      - метилпропионат
+- canonical_smiles: CCOC(=O)CC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - ethyl propionate
+      ru:
+      - этилпропионат
+- canonical_smiles: CCCOC(C)=O
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - propyl acetate
+      ru:
+      - пропилацетат
+- canonical_smiles: CC(=O)OCCC(C)C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isoamyl acetate
+      ru:
+      - изоамилацетат
+- canonical_smiles: COC(=O)c1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - methyl benzoate
+      ru:
+      - метилбензоат
+- canonical_smiles: CCOC(=O)c1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - ethyl benzoate
+      ru:
+      - этилбензоат
+- canonical_smiles: Nc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - aniline
+      ru:
+      - анилин
+- canonical_smiles: Cc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - toluene
+      ru:
+      - толуол
+- canonical_smiles: CCc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - ethylbenzene
+      ru:
+      - этилбензол
+- canonical_smiles: C=Cc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - styrene
+      ru:
+      - стирол
+- canonical_smiles: COc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - anisole
+      ru:
+      - анизол
+- canonical_smiles: CCOc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - phenetole
+      ru:
+      - фенетол
+- canonical_smiles: CC(C)c1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - cumene
+      - isopropylbenzene
+      ru:
+      - кумол
+      - изопропилбензол
+- canonical_smiles: Cc1ccc(C)cc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - p-xylene
+      - para-xylene
+      ru:
+      - п-ксилол
+      - пара-ксилол
+- canonical_smiles: Cc1cccc(C)c1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - m-xylene
+      - meta-xylene
+      ru:
+      - м-ксилол
+      - мета-ксилол
+- canonical_smiles: Cc1ccccc1C
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - o-xylene
+      - ortho-xylene
+      ru:
+      - о-ксилол
+      - орто-ксилол
+- canonical_smiles: Cc1cc(C)cc(C)c1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - mesitylene
+      ru:
+      - мезитилен
+- canonical_smiles: c1ccc(Oc2ccccc2)cc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - diphenyl ether
+      ru:
+      - дифениловый эфир
+- canonical_smiles: c1ccc(Cc2ccccc2)cc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - diphenylmethane
+      ru:
+      - дифенилметан
+- canonical_smiles: c1ccc(C(c2ccccc2)c2ccccc2)cc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - triphenylmethane
+      ru:
+      - трифенилметан
+- canonical_smiles: C#Cc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - phenylacetylene
+      ru:
+      - фенилацетилен
+- canonical_smiles: CC#N
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - acetonitrile
+      - methyl cyanide
+      ru:
+      - ацетонитрил
+      - метилцианид
+- canonical_smiles: CCC#N
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - propionitrile
+      - ethyl cyanide
+      ru:
+      - пропионитрил
+      - этилцианид
+- canonical_smiles: CC(C)C#N
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isobutyronitrile
+      - isopropyl cyanide
+      ru:
+      - изобутиронитрил
+      - изопропилцианид
+- canonical_smiles: N#Cc1ccccc1
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - benzonitrile
+      ru:
+      - бензонитрил
+- canonical_smiles: CC(C)(C)N
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - tert-butylamine
+      - t-butylamine
+      ru:
+      - трет-бутиламин
+- canonical_smiles: CC(C)N
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - isopropylamine
+      ru:
+      - изопропиламин
+- canonical_smiles: CCNCC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - diethylamine
+      ru:
+      - диэтиламин
+- canonical_smiles: CCN(CC)CC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - triethylamine
+      ru:
+      - триэтиламин
+- canonical_smiles: CNC
+  source_ref: curated_rational
+  names:
+    rational:
+      en:
+      - dimethylamine
+      ru:
+      - диметиламин
