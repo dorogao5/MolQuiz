@@ -9,6 +9,7 @@ from aiogram.types import User as TelegramUser
 from sqlalchemy import Select, String, cast, func, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+from structlog import get_logger
 
 from molquiz.db.models import (
     Attempt,
@@ -35,6 +36,8 @@ SUPPORTED_TOPICS = [
     ("nitrogen", "Азот"),
     ("halogen", "Галогены"),
 ]
+
+logger = get_logger(__name__)
 
 
 @dataclass(slots=True)
@@ -141,6 +144,15 @@ class PracticeService:
         async with self.session_factory() as session:
             settings = await self._get_settings_for_update(session, telegram_user_id)
             user = await self._get_user(session, telegram_user_id)
+            logger.info(
+                "issue_card_requested",
+                telegram_user_id=telegram_user_id,
+                mode=settings.mode,
+                difficulty_min=settings.difficulty_min,
+                difficulty_max=settings.difficulty_max,
+                topic_tags=settings.topic_tags or [],
+                repeat_errors=repeat_errors,
+            )
             query = self._build_card_query(
                 user.id,
                 settings,
@@ -149,6 +161,15 @@ class PracticeService:
             )
             card = await session.scalar(query)
             if card is None:
+                logger.info(
+                    "issue_card_no_match",
+                    telegram_user_id=telegram_user_id,
+                    mode=settings.mode,
+                    difficulty_min=settings.difficulty_min,
+                    difficulty_max=settings.difficulty_max,
+                    topic_tags=settings.topic_tags or [],
+                    repeat_errors=repeat_errors,
+                )
                 return None
 
             molecule = await session.get(Molecule, card.molecule_id)
@@ -191,6 +212,16 @@ class PracticeService:
                     mode=card.mode,
                     repeat_errors=repeat_errors,
                 )
+            )
+            logger.info(
+                "issue_card_selected",
+                telegram_user_id=telegram_user_id,
+                card_id=card.id,
+                molecule_id=molecule.id,
+                mode=card.mode,
+                difficulty=card.difficulty,
+                topic_tags=card.topic_tags,
+                repeat_errors=repeat_errors,
             )
             return practice_card
 

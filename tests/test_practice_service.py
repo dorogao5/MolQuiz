@@ -222,3 +222,55 @@ async def test_ensure_user_repairs_missing_settings_and_stats(session_factory, t
 
     card = await practice_service.issue_card(TgUser.id)
     assert card is not None
+
+
+@pytest.mark.asyncio
+async def test_rational_mode_accepts_parent_hydrocarbon_alias_and_difficulty_filters_cards(
+    session_factory,
+    tmp_path: Path,
+) -> None:
+    depiction_service = DepictionService(tmp_path / "storage")
+    content_service = ContentService(
+        session_factory,
+        depiction_service,
+        QwenHeadlessClient(None),
+    )
+    practice_service = PracticeService(
+        session_factory,
+        InMemorySessionStore(),
+        AnswerChecker(NoopOpsinClient()),
+        content_service,
+    )
+
+    entries = [
+        entry
+        for entry in content_service.load_manual_entries(Path("data/rational_curated.yaml"))
+        if entry.canonical_smiles in {"C=O", "CCc1ccccc1"}
+    ]
+    await content_service.seed_manual_entries(entries)
+
+    class TgUser:
+        id = 505
+        username = "tester"
+        first_name = "Test"
+        last_name = "User"
+
+    await practice_service.ensure_user(TgUser())
+    await practice_service.set_mode(TgUser.id, Mode.RATIONAL)
+
+    await practice_service.set_difficulty(TgUser.id, 4)
+    hard_card = await practice_service.issue_card(TgUser.id)
+    assert hard_card is not None
+    assert hard_card.card.difficulty == 4
+    assert hard_card.primary_ru == "метилфенилметан"
+
+    result = await practice_service.evaluate_answer(TgUser.id, "метилфенилметан")
+    assert result is not None
+    _, outcome = result
+    assert outcome.accepted is True
+
+    await practice_service.set_difficulty(TgUser.id, 1)
+    easy_card = await practice_service.issue_card(TgUser.id)
+    assert easy_card is not None
+    assert easy_card.card.difficulty == 1
+    assert easy_card.primary_ru == "формальдегид"

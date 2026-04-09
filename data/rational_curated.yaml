@@ -442,16 +442,20 @@ entries:
   names:
     rational:
       en:
+      - phenylmethane
       - toluene
       ru:
+      - фенилметан
       - толуол
 - canonical_smiles: CCc1ccccc1
   source_ref: curated_rational
   names:
     rational:
       en:
+      - methylphenylmethane
       - ethylbenzene
       ru:
+      - метилфенилметан
       - этилбензол
 - canonical_smiles: C=Cc1ccccc1
   source_ref: curated_rational
@@ -482,9 +486,11 @@ entries:
   names:
     rational:
       en:
+      - dimethylphenylmethane
       - cumene
       - isopropylbenzene
       ru:
+      - диметилфенилметан
       - кумол
       - изопропилбензол
 - canonical_smiles: Cc1ccc(C)cc1

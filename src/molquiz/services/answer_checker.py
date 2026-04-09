@@ -85,6 +85,19 @@ class AnswerChecker:
                     explanation="Точное совпадение с проверенным алиасом.",
                 )
 
+        if mode is Mode.RATIONAL:
+            candidate_bag = self._bag_signature(normalized.signature)
+            for variant in approved:
+                if candidate_bag == self._bag_signature(variant.normalized_signature):
+                    return ValidationOutcome(
+                        accepted=True,
+                        normalized_answer=normalized.normalized,
+                        signature=normalized.signature,
+                        locale=Locale(variant.locale),
+                        matched_variant_id=variant.id,
+                        explanation="Ответ принят как эквивалентная рациональная форма.",
+                    )
+
         if mode is Mode.IUPAC and normalized.locale_hint in {Locale.EN, None}:
             opsin_result = await self.opsin_client.parse_name(raw_answer)
             if opsin_result and opsin_result.stdinchikey == molecule_inchikey:
@@ -123,6 +136,14 @@ class AnswerChecker:
             if variant.is_primary:
                 return variant
         return naming_variants[0] if naming_variants else None
+
+    def _bag_signature(self, signature: str) -> tuple[str, ...]:
+        tokens = [
+            token
+            for token in signature.split("|")
+            if token and token not in {",", "(", ")", "[", "]", "-"}
+        ]
+        return tuple(sorted(tokens))
 
     def _classify_error(self, candidate_signature: str, canonical_signature: str) -> ErrorCategory:
         candidate_tokens = tokenize_answer(candidate_signature.replace("|", " "))

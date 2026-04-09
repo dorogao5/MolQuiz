@@ -77,3 +77,71 @@ async def test_answer_checker_classifies_locant_error() -> None:
     )
     assert outcome.accepted is False
     assert outcome.error_category == ErrorCategory.LOCANTS
+
+
+@pytest.mark.asyncio
+async def test_answer_checker_accepts_rational_parent_hydrocarbon_alias() -> None:
+    checker = AnswerChecker(FakeOpsinClient())
+    variants = [
+        NamingVariant(
+            id="1",
+            molecule_id="m1",
+            mode="rational",
+            locale="ru",
+            kind="canonical",
+            answer_text="метилфенилметан",
+            normalized_signature=build_token_signature("метилфенилметан"),
+            review_status="approved",
+            source_ref="test",
+            is_primary=True,
+        ),
+        NamingVariant(
+            id="2",
+            molecule_id="m1",
+            mode="rational",
+            locale="ru",
+            kind="accepted_alias",
+            answer_text="этилбензол",
+            normalized_signature=build_token_signature("этилбензол"),
+            review_status="approved",
+            source_ref="test",
+            is_primary=False,
+        ),
+    ]
+
+    exact = await checker.validate(
+        mode=Mode.RATIONAL,
+        molecule_inchikey="NOPE",
+        naming_variants=variants,
+        raw_answer="метилфенилметан",
+    )
+
+    assert exact.accepted is True
+
+
+@pytest.mark.asyncio
+async def test_answer_checker_accepts_reordered_multiword_rational_alias() -> None:
+    checker = AnswerChecker(FakeOpsinClient())
+    variants = [
+        NamingVariant(
+            id="1",
+            molecule_id="m1",
+            mode="rational",
+            locale="en",
+            kind="canonical",
+            answer_text="methyl propyl ether",
+            normalized_signature=build_token_signature("methyl propyl ether"),
+            review_status="approved",
+            source_ref="test",
+            is_primary=True,
+        )
+    ]
+
+    reordered = await checker.validate(
+        mode=Mode.RATIONAL,
+        molecule_inchikey="NOPE",
+        naming_variants=variants,
+        raw_answer="propyl methyl ether",
+    )
+
+    assert reordered.accepted is True
