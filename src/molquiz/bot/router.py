@@ -48,6 +48,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.message(F.text == "Подсказка")
     async def hint(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         hint_text = await app_context.practice_service.next_hint(message.from_user.id)
         if hint_text is None:
             await message.answer("Сначала получи карточку кнопкой «Новая молекула».")
@@ -56,6 +57,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.message(F.text == "Показать ответ")
     async def reveal(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         practice_card = await app_context.practice_service.reveal_answer(message.from_user.id)
         if practice_card is None:
             await message.answer("Активной карточки нет.")
@@ -67,11 +69,13 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.message(F.text == "Режим")
     async def choose_mode(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         settings = await app_context.practice_service.get_settings(message.from_user.id)
         await message.answer("Выбери режим тренировки.", reply_markup=mode_keyboard(settings.mode))
 
     @router.message(F.text == "Сложность")
     async def choose_difficulty(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         settings = await app_context.practice_service.get_settings(message.from_user.id)
         await message.answer(
             "Выбери уровень сложности.",
@@ -80,6 +84,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.message(F.text == "Темы")
     async def choose_topics(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         settings = await app_context.practice_service.get_settings(message.from_user.id)
         await message.answer(
             "Включи фильтры по темам.",
@@ -88,6 +93,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.message(F.text == "Статистика")
     async def stats(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         stats_row = await app_context.practice_service.get_stats(message.from_user.id)
         if stats_row is None:
             await message.answer("Статистика пока пуста.")
@@ -102,6 +108,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.callback_query(F.data.startswith("mode:"))
     async def set_mode(callback: CallbackQuery) -> None:
+        await app_context.practice_service.ensure_user(callback.from_user)
         mode = Mode(callback.data.split(":", 1)[1])
         settings = await app_context.practice_service.set_mode(callback.from_user.id, mode)
         await callback.message.edit_text(
@@ -112,6 +119,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.callback_query(F.data.startswith("difficulty:"))
     async def set_difficulty(callback: CallbackQuery) -> None:
+        await app_context.practice_service.ensure_user(callback.from_user)
         difficulty = int(callback.data.split(":", 1)[1])
         settings = await app_context.practice_service.set_difficulty(
             callback.from_user.id,
@@ -125,6 +133,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.callback_query(F.data.startswith("topic:"))
     async def toggle_topic(callback: CallbackQuery) -> None:
+        await app_context.practice_service.ensure_user(callback.from_user)
         topic = callback.data.split(":", 1)[1]
         settings = await app_context.practice_service.toggle_topic(callback.from_user.id, topic)
         await callback.message.edit_text(
@@ -135,6 +144,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.callback_query(F.data == "card:hint")
     async def hint_callback(callback: CallbackQuery) -> None:
+        await app_context.practice_service.ensure_user(callback.from_user)
         hint_text = await app_context.practice_service.next_hint(callback.from_user.id)
         if hint_text is None:
             await callback.answer("Нет активной карточки.", show_alert=True)
@@ -144,6 +154,7 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.callback_query(F.data == "card:reveal")
     async def reveal_callback(callback: CallbackQuery) -> None:
+        await app_context.practice_service.ensure_user(callback.from_user)
         practice_card = await app_context.practice_service.reveal_answer(callback.from_user.id)
         if practice_card is None:
             await callback.answer("Нет активной карточки.", show_alert=True)
@@ -156,11 +167,13 @@ def build_dispatcher(app_context: ApplicationContext) -> Dispatcher:
 
     @router.callback_query(F.data == "card:next")
     async def next_callback(callback: CallbackQuery) -> None:
+        await app_context.practice_service.ensure_user(callback.from_user)
         await _send_new_card(callback.message, repeat_errors=False)
         await callback.answer()
 
     @router.message(F.text)
     async def answer(message: Message) -> None:
+        await app_context.practice_service.ensure_user(message.from_user)
         result = await app_context.practice_service.evaluate_answer(
             message.from_user.id,
             message.text,

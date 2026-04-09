@@ -6,7 +6,8 @@ from pathlib import Path
 from random import choice
 
 from aiogram.types import User as TelegramUser
-from sqlalchemy import Select, func, select
+from sqlalchemy import Select, String, cast, func, select
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from molquiz.db.models import (
@@ -147,7 +148,12 @@ class PracticeService:
         async with self.session_factory() as session:
             settings = await self._get_settings_for_update(session, telegram_user_id)
             user = await self._get_user(session, telegram_user_id)
-            query = self._build_card_query(user.id, settings, repeat_errors=repeat_errors)
+            query = self._build_card_query(
+                user.id,
+                settings,
+                repeat_errors=repeat_errors,
+                dialect_name=session.get_bind().dialect.name,
+            )
             card = await session.scalar(query)
             if card is None:
                 return None
@@ -299,6 +305,7 @@ class PracticeService:
         settings: UserSettings,
         *,
         repeat_errors: bool,
+        dialect_name: str,
     ) -> Select[tuple[Card]]:
         stmt = select(Card).where(
             Card.mode == settings.mode,
@@ -308,7 +315,10 @@ class PracticeService:
         )
         if settings.topic_tags:
             for tag in settings.topic_tags:
-                stmt = stmt.where(Card.topic_tags.contains([tag]))
+                if dialect_name == "postgresql":
+                    stmt = stmt.where(cast(Card.topic_tags, JSONB).contains([tag]))
+                else:
+                    stmt = stmt.where(cast(Card.topic_tags, String).like(f'%"{tag}"%'))
 
         if repeat_errors:
             subquery = (

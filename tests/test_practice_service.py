@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 from sqlalchemy import select
+from sqlalchemy.dialects import postgresql
 
 from molquiz.db.models import DepictionVariant, Mode
 from molquiz.services.answer_checker import AnswerChecker
@@ -114,3 +115,67 @@ async def test_practice_service_regenerates_outdated_depictions(session_factory,
 
     assert len(current_active) == 4
     assert stale_active == []
+
+
+@pytest.mark.asyncio
+async def test_practice_service_issue_card_with_topic_filters(session_factory, tmp_path: Path) -> None:
+    depiction_service = DepictionService(tmp_path / "storage")
+    content_service = ContentService(
+        session_factory,
+        depiction_service,
+        QwenHeadlessClient(None),
+    )
+    practice_service = PracticeService(
+        session_factory,
+        InMemorySessionStore(),
+        AnswerChecker(NoopOpsinClient()),
+        content_service,
+    )
+
+    entries = content_service.load_manual_entries(Path("data/demo_cards.yaml"))
+    await content_service.seed_manual_entries(entries)
+
+    class TgUser:
+        id = 303
+        username = "tester"
+        first_name = "Test"
+        last_name = "User"
+
+    await practice_service.ensure_user(TgUser())
+    await practice_service.set_mode(TgUser.id, Mode.IUPAC)
+    await practice_service.set_difficulty(TgUser.id, 5)
+    await practice_service.toggle_topic(TgUser.id, "aromatic")
+    await practice_service.toggle_topic(TgUser.id, "oxygen")
+
+    card = await practice_service.issue_card(TgUser.id)
+    assert card is not None
+    assert card.primary_en == "2-[4-(2-methylpropyl)phenyl]propanoic acid"
+
+
+def test_build_card_query_uses_jsonb_contains_for_postgresql() -> None:
+    practice_service = PracticeService(
+        session_factory=None,
+        session_store=None,
+        answer_checker=AnswerChecker(NoopOpsinClient()),
+        content_service=None,
+    )
+    settings = type(
+        "SettingsStub",
+        (),
+        {
+            "mode": "iupac",
+            "difficulty_min": 1,
+            "difficulty_max": 5,
+            "topic_tags": ["alkene", "halogen"],
+        },
+    )()
+
+    query = practice_service._build_card_query(
+        "user-id",
+        settings,
+        repeat_errors=False,
+        dialect_name="postgresql",
+    )
+    sql = str(query.compile(dialect=postgresql.dialect()))
+
+    assert "CAST(cards.topic_tags AS JSONB) @>" in sql
