@@ -1,0 +1,106 @@
+services:
+  postgres:
+    image: postgres:16-bookworm
+    environment:
+      POSTGRES_DB: molquiz
+      POSTGRES_USER: molquiz
+      POSTGRES_PASSWORD: molquiz
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U molquiz -d molquiz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-bookworm
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  opsin:
+    build:
+      context: ./docker/opsin
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  bot:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
+      MOLQUIZ_REDIS_URL: redis://redis:6379/0
+      MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
+      MOLQUIZ_STORAGE_DIR: /app/storage
+      MOLQUIZ_ENVIRONMENT: production
+    command: ["uv", "run", "molquiz-web"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      opsin:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    volumes:
+      - storage_data:/app/storage
+
+  worker:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
+      MOLQUIZ_REDIS_URL: redis://redis:6379/0
+      MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
+      MOLQUIZ_STORAGE_DIR: /app/storage
+      MOLQUIZ_ENVIRONMENT: production
+    command: ["uv", "run", "molquiz-worker"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      opsin:
+        condition: service_healthy
+    volumes:
+      - storage_data:/app/storage
+
+  caddy:
+    image: caddy:2.8
+    profiles: ["prod"]
+    depends_on:
+      - bot
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  postgres_data:
+  redis_data:
+  storage_data:
+  caddy_data:
+  caddy_config:
+

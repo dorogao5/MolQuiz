@@ -1,0 +1,9 @@
+tasks:
+  - task_id: replace-with-review-task-id
+    action: approve
+    answer_text: 2-метилпропан
+    locale: ru
+    mode: iupac
+    mark_primary: true
+    notes: Проверено вручную
+

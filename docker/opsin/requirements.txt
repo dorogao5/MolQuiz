@@ -1,0 +1,4 @@
+fastapi==0.115.12
+py2opsin==0.0.7
+uvicorn[standard]==0.34.0
+

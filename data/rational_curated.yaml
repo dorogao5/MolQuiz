@@ -1,0 +1,26 @@
+entries:
+  - canonical_smiles: CC(Cl)C
+    source_ref: curated_rational
+    names:
+      rational:
+        en:
+          - isopropyl chloride
+        ru:
+          - изопропилхлорид
+  - canonical_smiles: CC(C)(C)Cl
+    source_ref: curated_rational
+    names:
+      rational:
+        en:
+          - tert-butyl chloride
+        ru:
+          - трет-бутилхлорид
+  - canonical_smiles: CC(C)(C)CO
+    source_ref: curated_rational
+    names:
+      rational:
+        en:
+          - neopentyl alcohol
+        ru:
+          - неопентиловый спирт
+

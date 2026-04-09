@@ -1,0 +1,66 @@
+entries:
+  - canonical_smiles: CC(C)C
+    source_ref: demo
+    names:
+      iupac:
+        en:
+          - 2-methylpropane
+        ru:
+          - 2-метилпропан
+      rational:
+        en:
+          - isobutane
+        ru:
+          - изобутан
+  - canonical_smiles: CC(C)CO
+    source_ref: demo
+    names:
+      iupac:
+        en:
+          - 2-methylpropan-1-ol
+        ru:
+          - 2-метилпропан-1-ол
+      rational:
+        en:
+          - isobutyl alcohol
+        ru:
+          - изобутиловый спирт
+  - canonical_smiles: CC(=O)OCC
+    source_ref: demo
+    names:
+      iupac:
+        en:
+          - ethyl ethanoate
+        ru:
+          - этил этаноат
+      rational:
+        en:
+          - ethyl acetate
+        ru:
+          - этилацетат
+  - canonical_smiles: CC(C)(C)O
+    source_ref: demo
+    names:
+      iupac:
+        en:
+          - 2-methylpropan-2-ol
+        ru:
+          - 2-метилпропан-2-ол
+      rational:
+        en:
+          - tert-butyl alcohol
+        ru:
+          - трет-бутиловый спирт
+  - canonical_smiles: CC(C)CC1=CC=C(C=C1)C(C)C(=O)O
+    source_ref: demo
+    difficulty: 5
+    topic_tags:
+      - aromatic
+      - oxygen
+    names:
+      iupac:
+        en:
+          - 2-[4-(2-methylpropyl)phenyl]propanoic acid
+        ru:
+          - 2-[4-(2-метилпропил)фенил]пропановая кислота
+
