@@ -5,9 +5,9 @@ from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
 
-from PIL import Image, ImageOps
+from PIL import Image
 
-CURRENT_RENDER_PRESET = "house-bw-white-v2"
+CURRENT_RENDER_PRESET = "house-bw-white-v3"
 
 
 @dataclass(slots=True)
@@ -106,7 +106,7 @@ class DepictionService:
         }
         return formula, descriptors
 
-    def render_png(self, smiles: str, *, rotation: int = 0, flip_x: bool = False) -> bytes:
+    def render_png(self, smiles: str) -> bytes:
         from rdkit.Chem.Draw import rdMolDraw2D
 
         molecule = self._build_molecule(smiles)
@@ -124,17 +124,13 @@ class DepictionService:
         png = drawer.GetDrawingText()
 
         image = self._solid_white_background(png)
-        if flip_x:
-            image = ImageOps.mirror(image)
-        if rotation:
-            image = image.rotate(rotation, expand=True, fillcolor="white")
         output = BytesIO()
         image.save(output, format="PNG")
         return output.getvalue()
 
-    def build_artifact(self, smiles: str, *, rotation: int = 0, flip_x: bool = False) -> DepictionArtifact:
+    def build_artifact(self, smiles: str) -> DepictionArtifact:
         formula, descriptors = self.compute_descriptor_snapshot(smiles)
-        image_bytes = self.render_png(smiles, rotation=rotation, flip_x=flip_x)
+        image_bytes = self.render_png(smiles)
         return DepictionArtifact(
             image_bytes=image_bytes,
             image_hash=hashlib.sha256(image_bytes).hexdigest(),

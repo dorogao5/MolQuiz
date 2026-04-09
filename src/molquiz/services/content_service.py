@@ -7,6 +7,7 @@ from typing import Any
 import yaml
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+from structlog import get_logger
 
 from molquiz.db.models import (
     Card,
@@ -29,9 +30,11 @@ from molquiz.services.qwen import QwenHeadlessClient
 from molquiz.services.translator_ru import translate_iupac_en_to_ru
 
 DEFAULT_HINTS = ["class", "formula", "main_chain"]
-DEFAULT_VARIANTS = [(0, False), (90, False), (180, False), (0, True)]
+DEFAULT_VARIANTS = [(0, False)]
 EXPECTED_VARIANT_COUNT = len(DEFAULT_VARIANTS)
 REQUIRED_LOCALES = {Locale.RU.value, Locale.EN.value}
+
+logger = get_logger(__name__)
 
 
 def _path_exists(path: str) -> bool:
@@ -289,11 +292,7 @@ class ContentService:
             depiction.is_active = False
 
         for rotation, flip_x in DEFAULT_VARIANTS:
-            artifact = self.depiction_service.build_artifact(
-                molecule.canonical_smiles,
-                rotation=rotation,
-                flip_x=flip_x,
-            )
+            artifact = self.depiction_service.build_artifact(molecule.canonical_smiles)
             path = self.depiction_service.persist_artifact(
                 molecule.id,
                 artifact,
@@ -322,6 +321,14 @@ class ContentService:
             depiction.is_active = True
 
         await session.flush()
+        logger.info(
+            "depictions_regenerated",
+            molecule_id=molecule.id,
+            canonical_smiles=molecule.canonical_smiles,
+            render_preset=self.depiction_service.render_preset,
+            active_variants=EXPECTED_VARIANT_COUNT,
+            previous_variants=len(depictions),
+        )
         return True
 
     async def _refresh_publication_state(self, session: AsyncSession, *, molecule_id: str | None = None) -> int:

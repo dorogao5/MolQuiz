@@ -113,7 +113,7 @@ async def test_practice_service_regenerates_outdated_depictions(session_factory,
             if depiction.is_active and depiction.render_preset == "house-default"
         ]
 
-    assert len(current_active) == 4
+    assert len(current_active) == 1
     assert stale_active == []
 
 

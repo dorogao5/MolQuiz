@@ -21,3 +21,13 @@ def test_render_png_uses_opaque_white_background(tmp_path: Path) -> None:
     assert image.getpixel((image.width - 1, image.height - 1)) == (255, 255, 255)
     assert white_pixels > len(pixels) * 0.5
     assert dark_pixels > 1_000
+
+
+def test_build_artifact_is_stable_for_removed_flip_and_rotation_variants(tmp_path: Path) -> None:
+    depiction_service = DepictionService(tmp_path / "storage")
+
+    artifact = depiction_service.build_artifact("FCCCCCCCCI")
+    image = Image.open(BytesIO(artifact.image_bytes))
+
+    assert image.mode == "RGB"
+    assert image.getbbox() is not None
