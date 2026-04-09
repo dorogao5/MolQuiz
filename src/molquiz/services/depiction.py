@@ -7,6 +7,8 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
+CURRENT_RENDER_PRESET = "house-bw-white-v2"
+
 
 @dataclass(slots=True)
 class DepictionArtifact:
@@ -21,16 +23,26 @@ class DepictionService:
         self.storage_dir = storage_dir
         self.depictions_dir = storage_dir / "depictions"
         self.depictions_dir.mkdir(parents=True, exist_ok=True)
+        self.render_preset = CURRENT_RENDER_PRESET
 
     def _build_molecule(self, smiles: str):
         from rdkit import Chem
-        from rdkit.Chem import AllChem
+        from rdkit.Chem import rdDepictor
 
         molecule = Chem.MolFromSmiles(smiles)
         if molecule is None:
             raise ValueError(f"Invalid SMILES: {smiles}")
-        AllChem.Compute2DCoords(molecule)
+        rdDepictor.SetPreferCoordGen(True)
+        rdDepictor.Compute2DCoords(molecule)
         return molecule
+
+    def _solid_white_background(self, png: bytes) -> Image.Image:
+        image = Image.open(BytesIO(png))
+        if "A" in image.getbands():
+            rgba = image.convert("RGBA")
+            background = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+            return Image.alpha_composite(background, rgba).convert("RGB")
+        return image.convert("RGB")
 
     def compute_descriptor_snapshot(self, smiles: str) -> tuple[str, dict]:
         from rdkit import Chem
@@ -100,14 +112,18 @@ class DepictionService:
         molecule = self._build_molecule(smiles)
         drawer = rdMolDraw2D.MolDraw2DCairo(900, 600)
         options = drawer.drawOptions()
+        options.useBWAtomPalette()
+        options.setBackgroundColour((1, 1, 1))
         options.addStereoAnnotation = False
-        options.bondLineWidth = 2
-        options.clearBackground = False
+        options.bondLineWidth = 3
+        options.clearBackground = True
+        options.multipleBondOffset = 0.18
+        options.padding = 0.03
         rdMolDraw2D.PrepareAndDrawMolecule(drawer, molecule)
         drawer.FinishDrawing()
         png = drawer.GetDrawingText()
 
-        image = Image.open(BytesIO(png)).convert("RGB")
+        image = self._solid_white_background(png)
         if flip_x:
             image = ImageOps.mirror(image)
         if rotation:

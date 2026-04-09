@@ -30,7 +30,12 @@ from molquiz.services.translator_ru import translate_iupac_en_to_ru
 
 DEFAULT_HINTS = ["class", "formula", "main_chain"]
 DEFAULT_VARIANTS = [(0, False), (90, False), (180, False), (0, True)]
+EXPECTED_VARIANT_COUNT = len(DEFAULT_VARIANTS)
 REQUIRED_LOCALES = {Locale.RU.value, Locale.EN.value}
+
+
+def _path_exists(path: str) -> bool:
+    return Path(path).exists()
 
 
 @dataclass(slots=True)
@@ -259,12 +264,29 @@ class ContentService:
             await session.commit()
             return changed
 
-    async def ensure_depictions(self, session: AsyncSession, molecule: Molecule) -> None:
-        existing = await session.scalar(
-            select(DepictionVariant.id).where(DepictionVariant.molecule_id == molecule.id).limit(1)
-        )
-        if existing:
-            return
+    async def ensure_depictions(self, session: AsyncSession, molecule: Molecule) -> bool:
+        depictions = (
+            await session.scalars(select(DepictionVariant).where(DepictionVariant.molecule_id == molecule.id))
+        ).all()
+        active_current = {
+            (depiction.rotation_seed, depiction.flip_x): depiction
+            for depiction in depictions
+            if depiction.is_active
+            and depiction.render_preset == self.depiction_service.render_preset
+            and _path_exists(depiction.storage_path)
+        }
+        if len(active_current) == EXPECTED_VARIANT_COUNT and all(
+            variant in active_current for variant in DEFAULT_VARIANTS
+        ):
+            return False
+
+        current_depictions = {
+            (depiction.rotation_seed, depiction.flip_x): depiction
+            for depiction in depictions
+            if depiction.render_preset == self.depiction_service.render_preset
+        }
+        for depiction in depictions:
+            depiction.is_active = False
 
         for rotation, flip_x in DEFAULT_VARIANTS:
             artifact = self.depiction_service.build_artifact(
@@ -277,18 +299,30 @@ class ContentService:
                 artifact,
                 variant_label=f"rot{rotation}_flip{int(flip_x)}",
             )
-            session.add(
-                DepictionVariant(
-                    molecule_id=molecule.id,
-                    render_preset="house-default",
-                    rotation_seed=rotation,
-                    flip_x=flip_x,
-                    storage_path=str(path),
-                    image_hash=artifact.image_hash,
-                    telegram_file_id=None,
-                    is_active=True,
+            depiction = current_depictions.get((rotation, flip_x))
+            if depiction is None:
+                session.add(
+                    DepictionVariant(
+                        molecule_id=molecule.id,
+                        render_preset=self.depiction_service.render_preset,
+                        rotation_seed=rotation,
+                        flip_x=flip_x,
+                        storage_path=str(path),
+                        image_hash=artifact.image_hash,
+                        telegram_file_id=None,
+                        is_active=True,
+                    )
                 )
-            )
+                continue
+
+            depiction.render_preset = self.depiction_service.render_preset
+            depiction.storage_path = str(path)
+            depiction.image_hash = artifact.image_hash
+            depiction.telegram_file_id = None
+            depiction.is_active = True
+
+        await session.flush()
+        return True
 
     async def _refresh_publication_state(self, session: AsyncSession, *, molecule_id: str | None = None) -> int:
         cards_stmt = select(Card)

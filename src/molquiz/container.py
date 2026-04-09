@@ -67,7 +67,7 @@ async def create_application_context(settings: Settings) -> ApplicationContext:
     depiction_service = DepictionService(settings.storage_dir)
     answer_checker = AnswerChecker(opsin_client)
     content_service = ContentService(session_factory, depiction_service, qwen_client)
-    practice_service = PracticeService(session_factory, session_store, answer_checker)
+    practice_service = PracticeService(session_factory, session_store, answer_checker, content_service)
 
     return ApplicationContext(
         settings=settings,

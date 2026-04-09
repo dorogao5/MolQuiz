@@ -72,10 +72,12 @@ class PracticeService:
         session_factory: async_sessionmaker[AsyncSession],
         session_store,
         answer_checker: AnswerChecker,
+        content_service,
     ) -> None:
         self.session_factory = session_factory
         self.session_store = session_store
         self.answer_checker = answer_checker
+        self.content_service = content_service
 
     async def ensure_user(self, telegram_user: TelegramUser) -> UserProfile:
         async with self.session_factory() as session:
@@ -151,6 +153,9 @@ class PracticeService:
                 return None
 
             molecule = await session.get(Molecule, card.molecule_id)
+            depictions_changed = await self.content_service.ensure_depictions(session, molecule)
+            if depictions_changed:
+                await session.commit()
             depictions = (
                 await session.scalars(
                     select(DepictionVariant).where(
