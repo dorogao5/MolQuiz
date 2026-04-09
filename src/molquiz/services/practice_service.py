@@ -92,26 +92,19 @@ class PracticeService:
                 )
                 session.add(user)
                 await session.flush()
-                session.add(UserSettings(user_id=user.id))
-                session.add(UserStats(user_id=user.id))
             else:
                 user.username = telegram_user.username
                 user.first_name = telegram_user.first_name
                 user.last_name = telegram_user.last_name
 
+            await self._ensure_user_related_rows(session, user.id)
             await session.commit()
             return user
 
     async def get_settings(self, telegram_user_id: int) -> UserSettings:
         async with self.session_factory() as session:
-            stmt = (
-                select(UserSettings)
-                .join(UserProfile, UserProfile.id == UserSettings.user_id)
-                .where(UserProfile.telegram_id == telegram_user_id)
-            )
-            settings = await session.scalar(stmt)
-            if settings is None:
-                raise LookupError("User settings not found")
+            settings = await self._get_settings_for_update(session, telegram_user_id)
+            await session.commit()
             return settings
 
     async def set_mode(self, telegram_user_id: int, mode: Mode) -> UserSettings:
@@ -292,12 +285,12 @@ class PracticeService:
 
     async def get_stats(self, telegram_user_id: int) -> UserStats | None:
         async with self.session_factory() as session:
-            stmt = (
-                select(UserStats)
-                .join(UserProfile, UserProfile.id == UserStats.user_id)
-                .where(UserProfile.telegram_id == telegram_user_id)
-            )
-            return await session.scalar(stmt)
+            user = await session.scalar(select(UserProfile).where(UserProfile.telegram_id == telegram_user_id))
+            if user is None:
+                return None
+            await self._ensure_user_related_rows(session, user.id)
+            await session.commit()
+            return await session.scalar(select(UserStats).where(UserStats.user_id == user.id))
 
     def _build_card_query(
         self,
@@ -362,12 +355,20 @@ class PracticeService:
         return user
 
     async def _get_settings_for_update(self, session: AsyncSession, telegram_user_id: int) -> UserSettings:
-        stmt = (
-            select(UserSettings)
-            .join(UserProfile, UserProfile.id == UserSettings.user_id)
-            .where(UserProfile.telegram_id == telegram_user_id)
-        )
-        settings = await session.scalar(stmt)
+        user = await self._get_user(session, telegram_user_id)
+        await self._ensure_user_related_rows(session, user.id)
+        settings = await session.scalar(select(UserSettings).where(UserSettings.user_id == user.id))
         if settings is None:
-            raise LookupError("User settings not found")
+            raise LookupError("User settings not found after repair")
         return settings
+
+    async def _ensure_user_related_rows(self, session: AsyncSession, user_id: str) -> None:
+        settings = await session.scalar(select(UserSettings).where(UserSettings.user_id == user_id))
+        if settings is None:
+            session.add(UserSettings(user_id=user_id))
+
+        stats = await session.scalar(select(UserStats).where(UserStats.user_id == user_id))
+        if stats is None:
+            session.add(UserStats(user_id=user_id))
+
+        await session.flush()

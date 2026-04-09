@@ -5,7 +5,7 @@ import pytest
 from sqlalchemy import select
 from sqlalchemy.dialects import postgresql
 
-from molquiz.db.models import DepictionVariant, Mode
+from molquiz.db.models import DepictionVariant, Mode, UserProfile
 from molquiz.services.answer_checker import AnswerChecker
 from molquiz.services.content_service import ContentService
 from molquiz.services.depiction import DepictionService
@@ -179,3 +179,46 @@ def test_build_card_query_uses_jsonb_contains_for_postgresql() -> None:
     sql = str(query.compile(dialect=postgresql.dialect()))
 
     assert "CAST(cards.topic_tags AS JSONB) @>" in sql
+
+
+@pytest.mark.asyncio
+async def test_ensure_user_repairs_missing_settings_and_stats(session_factory, tmp_path: Path) -> None:
+    depiction_service = DepictionService(tmp_path / "storage")
+    content_service = ContentService(
+        session_factory,
+        depiction_service,
+        QwenHeadlessClient(None),
+    )
+    practice_service = PracticeService(
+        session_factory,
+        InMemorySessionStore(),
+        AnswerChecker(NoopOpsinClient()),
+        content_service,
+    )
+
+    entries = content_service.load_manual_entries(Path("data/demo_cards.yaml"))
+    await content_service.seed_manual_entries(entries[:1])
+
+    async with session_factory() as session:
+        session.add(
+            UserProfile(
+                telegram_id=404,
+                username="legacy",
+                first_name="Legacy",
+                last_name="User",
+            )
+        )
+        await session.commit()
+
+    class TgUser:
+        id = 404
+        username = "legacy"
+        first_name = "Legacy"
+        last_name = "User"
+
+    await practice_service.ensure_user(TgUser())
+    settings = await practice_service.get_settings(TgUser.id)
+    assert settings.mode == "iupac"
+
+    card = await practice_service.issue_card(TgUser.id)
+    assert card is not None
