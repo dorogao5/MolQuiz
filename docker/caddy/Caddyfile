@@ -1,4 +1,3 @@
 {$MOLQUIZ_DOMAIN} {
-  reverse_proxy bot:8081
+  reverse_proxy bot-web:8081
 }
-

@@ -63,6 +63,8 @@ MOLQUIZ_REDIS_URL=memory:// uv run molquiz-dev
 
 ## Запуск через Docker
 
+Обычный запуск, без webhook и без `443`:
+
 ```bash
 docker compose up --build -d postgres redis opsin bot worker
 docker compose exec bot uv run alembic upgrade head
@@ -70,7 +72,9 @@ docker compose exec bot uv run molquiz-seed-demo --path data/demo_cards.yaml
 docker compose exec bot uv run molquiz-seed-rational --path data/rational_curated.yaml
 ```
 
-Для production с HTTPS:
+В этом режиме бот работает через polling. Никакие `MOLQUIZ_TELEGRAM_WEBHOOK_SECRET` и `MOLQUIZ_TELEGRAM_WEBHOOK_BASE_URL` не нужны.
+
+Если зачем-то нужен именно webhook, тогда уже отдельный production-профиль:
 
 ```bash
 MOLQUIZ_DOMAIN=your.domain.tld docker compose --profile prod up --build -d
@@ -81,13 +85,19 @@ MOLQUIZ_DOMAIN=your.domain.tld docker compose --profile prod up --build -d
 Скопировать `.env.example` в `.env` и заполнить минимум:
 
 - `MOLQUIZ_TELEGRAM_TOKEN`
-- `MOLQUIZ_TELEGRAM_WEBHOOK_SECRET`
-- `MOLQUIZ_TELEGRAM_WEBHOOK_BASE_URL`
 - `MOLQUIZ_DATABASE_URL`
 - `MOLQUIZ_REDIS_URL`
 - `MOLQUIZ_OPSIN_BASE_URL`
 
+Webhook-переменные нужны только для режима `prod` с `molquiz-web`.
+
 ## Полезные команды
+
+Запуск polling-бота:
+
+```bash
+uv run molquiz-dev
+```
 
 Запуск webhook-приложения:
 
