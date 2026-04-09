@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 COPY pyproject.toml README.md .python-version ./
+COPY alembic.ini ./
+COPY alembic ./alembic
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --extra dev --no-install-project
 
 COPY src ./src
@@ -46,4 +48,3 @@ ENV PATH="/app/.venv/bin:${PATH}" \
 EXPOSE 8081
 
 CMD ["uv", "run", "molquiz-web"]
-

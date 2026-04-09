@@ -49,6 +49,7 @@ services:
       MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
       MOLQUIZ_STORAGE_DIR: /app/storage
       MOLQUIZ_ENVIRONMENT: production
+      MOLQUIZ_AUTO_CREATE_SCHEMA: "true"
     command: ["uv", "run", "molquiz-dev"]
     depends_on:
       postgres:
@@ -72,6 +73,7 @@ services:
       MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
       MOLQUIZ_STORAGE_DIR: /app/storage
       MOLQUIZ_ENVIRONMENT: production
+      MOLQUIZ_AUTO_CREATE_SCHEMA: "true"
     command: ["uv", "run", "molquiz-web"]
     depends_on:
       postgres:
@@ -96,6 +98,7 @@ services:
       MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
       MOLQUIZ_STORAGE_DIR: /app/storage
       MOLQUIZ_ENVIRONMENT: production
+      MOLQUIZ_AUTO_CREATE_SCHEMA: "true"
     command: ["uv", "run", "molquiz-worker"]
     depends_on:
       postgres:
