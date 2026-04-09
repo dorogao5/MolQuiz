@@ -41,6 +41,7 @@ services:
   bot:
     build:
       context: .
+    restart: unless-stopped
     env_file:
       - .env
     environment:
@@ -64,6 +65,7 @@ services:
   bot-web:
     build:
       context: .
+    restart: unless-stopped
     profiles: ["prod"]
     env_file:
       - .env
@@ -90,6 +92,7 @@ services:
   worker:
     build:
       context: .
+    restart: unless-stopped
     env_file:
       - .env
     environment:
