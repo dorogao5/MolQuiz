@@ -3,8 +3,8 @@ from pathlib import Path
 import pytest
 from sqlalchemy import select
 
-from molquiz.db.models import Card, Molecule, PublishStatus, ReviewTask, ReviewTaskType
-from molquiz.services.content_service import ContentService, ReviewDecision
+from molquiz.db.models import Card, Molecule, NamingVariant, PublishStatus, ReviewTask, ReviewTaskType
+from molquiz.services.content_service import ContentService, ManualEntry, ReviewDecision
 from molquiz.services.depiction import DepictionService
 from molquiz.services.pubchem import PubChemCompound
 from molquiz.services.qwen import QwenHeadlessClient
@@ -65,3 +65,89 @@ async def test_pubchem_review_cycle_publishes_card_after_ru_approval(session_fac
         molecule = await session.get(Molecule, card.molecule_id)
         assert card.is_published is True
         assert molecule.publish_status == PublishStatus.PUBLISHED.value
+
+
+@pytest.mark.asyncio
+async def test_seed_manual_entries_replaces_stale_primary_ru_variant(session_factory, tmp_path: Path) -> None:
+    depiction_service = DepictionService(tmp_path / "storage")
+    content_service = ContentService(
+        session_factory,
+        depiction_service,
+        QwenHeadlessClient(None),
+    )
+    old_entry = ManualEntry(
+        canonical_smiles="CCc1cccc(C)c1C",
+        source_ref="test_seed",
+        names={
+            "iupac": {
+                "en": ["1-ethyl-2,3-dimethylbenzene"],
+                "ru": ["1-этил-2,3-диметилбензол"],
+            }
+        },
+    )
+    new_entry = ManualEntry(
+        canonical_smiles="CCc1cccc(C)c1C",
+        source_ref="test_seed",
+        names={
+            "iupac": {
+                "en": ["1-ethyl-2,3-dimethylbenzene"],
+                "ru": ["2,3-диметил-1-этилбензол"],
+            }
+        },
+    )
+
+    await content_service.seed_manual_entries([old_entry])
+    await content_service.seed_manual_entries([new_entry])
+
+    async with session_factory() as session:
+        variants = (
+            await session.scalars(
+                select(NamingVariant).where(
+                    NamingVariant.mode == "iupac",
+                    NamingVariant.locale == "ru",
+                )
+            )
+        ).all()
+
+    assert [variant.answer_text for variant in variants if variant.is_primary] == ["2,3-диметил-1-этилбензол"]
+    assert all(variant.answer_text != "1-этил-2,3-диметилбензол" for variant in variants)
+
+
+@pytest.mark.asyncio
+async def test_sync_primary_ru_iupac_variants_updates_existing_db_rows(session_factory, tmp_path: Path) -> None:
+    depiction_service = DepictionService(tmp_path / "storage")
+    content_service = ContentService(
+        session_factory,
+        depiction_service,
+        QwenHeadlessClient(None),
+    )
+    await content_service.seed_manual_entries(
+        [
+            ManualEntry(
+                canonical_smiles="CCc1cccc(C)c1C",
+                source_ref="test_seed",
+                names={
+                    "iupac": {
+                        "en": ["1-ethyl-2,3-dimethylbenzene"],
+                        "ru": ["1-этил-2,3-диметилбензол"],
+                    }
+                },
+            )
+        ]
+    )
+
+    summary = await content_service.sync_primary_ru_iupac_variants()
+    assert summary["updated"] == 1
+
+    async with session_factory() as session:
+        variants = (
+            await session.scalars(
+                select(NamingVariant).where(
+                    NamingVariant.mode == "iupac",
+                    NamingVariant.locale == "ru",
+                )
+            )
+        ).all()
+
+    assert [variant.answer_text for variant in variants if variant.is_primary] == ["2,3-диметил-1-этилбензол"]
+    assert all(variant.answer_text != "1-этил-2,3-диметилбензол" for variant in variants)

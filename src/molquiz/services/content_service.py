@@ -135,6 +135,7 @@ class ContentService:
                                 review_status=ReviewStatus.APPROVED,
                                 source_ref=entry.source_ref or "manual_seed",
                                 is_primary=index == 0,
+                                replace_existing_primary=index == 0,
                             )
                             session.add(variant)
 
@@ -176,6 +177,7 @@ class ContentService:
                     review_status=ReviewStatus.APPROVED,
                     source_ref=f"pubchem:cid:{compound.cid}",
                     is_primary=True,
+                    replace_existing_primary=True,
                 )
                 session.add(en_variant)
 
@@ -190,6 +192,7 @@ class ContentService:
                     review_status=ReviewStatus.PENDING,
                     source_ref=f"rule_based:pubchem:cid:{compound.cid}",
                     is_primary=True,
+                    replace_existing_primary=True,
                 )
                 session.add(ru_variant)
                 await self._queue_review_task(
@@ -223,6 +226,58 @@ class ContentService:
 
             await session.commit()
         return imported
+
+    async def sync_primary_ru_iupac_variants(self) -> dict[str, int]:
+        summary = {"checked": 0, "updated": 0}
+        affected_molecules: set[str] = set()
+
+        async with self.session_factory() as session:
+            en_variants = (
+                await session.scalars(
+                    select(NamingVariant).where(
+                        NamingVariant.mode == Mode.IUPAC.value,
+                        NamingVariant.locale == Locale.EN.value,
+                        NamingVariant.is_primary.is_(True),
+                    )
+                )
+            ).all()
+
+            for en_variant in en_variants:
+                expected_ru = translate_iupac_en_to_ru(en_variant.answer_text)
+                summary["checked"] += 1
+
+                ru_primary = await session.scalar(
+                    select(NamingVariant).where(
+                        NamingVariant.molecule_id == en_variant.molecule_id,
+                        NamingVariant.mode == Mode.IUPAC.value,
+                        NamingVariant.locale == Locale.RU.value,
+                        NamingVariant.is_primary.is_(True),
+                    )
+                )
+                if ru_primary is not None and ru_primary.answer_text == expected_ru:
+                    continue
+
+                await self._upsert_naming_variant(
+                    session,
+                    molecule_id=en_variant.molecule_id,
+                    mode=Mode.IUPAC,
+                    locale=Locale.RU,
+                    answer_text=expected_ru,
+                    kind=NamingKind.CANONICAL,
+                    review_status=ReviewStatus.APPROVED,
+                    source_ref="sync:ru_iupac",
+                    is_primary=True,
+                    replace_existing_primary=True,
+                )
+                summary["updated"] += 1
+                affected_molecules.add(en_variant.molecule_id)
+
+            for molecule_id in affected_molecules:
+                await self._refresh_publication_state(session, molecule_id=molecule_id)
+
+            await session.commit()
+
+        return summary
 
     async def apply_review_decisions(self, decisions: list[ReviewDecision]) -> dict[str, int]:
         summary = {"processed": 0, "approved": 0, "rejected": 0, "published_cards": 0}
@@ -434,6 +489,7 @@ class ContentService:
         review_status: ReviewStatus,
         source_ref: str,
         is_primary: bool,
+        replace_existing_primary: bool = False,
     ) -> NamingVariant:
         existing = await session.scalar(
             select(NamingVariant).where(
@@ -449,7 +505,53 @@ class ContentService:
             existing.kind = kind.value
             existing.source_ref = source_ref
             existing.is_primary = is_primary
+            if is_primary:
+                await self._clear_primary_variant(
+                    session,
+                    molecule_id=molecule_id,
+                    mode=mode,
+                    locale=locale,
+                    keep_variant_id=existing.id,
+                    reject_demoted=replace_existing_primary,
+                )
             return existing
+
+        if replace_existing_primary and is_primary and kind is NamingKind.CANONICAL:
+            existing_primary = await session.scalar(
+                select(NamingVariant)
+                .where(
+                    NamingVariant.molecule_id == molecule_id,
+                    NamingVariant.mode == mode.value,
+                    NamingVariant.locale == locale.value,
+                    NamingVariant.is_primary.is_(True),
+                )
+                .order_by(NamingVariant.created_at.asc())
+            )
+            if existing_primary is not None:
+                existing_primary.answer_text = answer_text
+                existing_primary.normalized_signature = build_token_signature(answer_text)
+                existing_primary.review_status = review_status.value
+                existing_primary.kind = kind.value
+                existing_primary.source_ref = source_ref
+                existing_primary.is_primary = True
+                await self._clear_primary_variant(
+                    session,
+                    molecule_id=molecule_id,
+                    mode=mode,
+                    locale=locale,
+                    keep_variant_id=existing_primary.id,
+                    reject_demoted=True,
+                )
+                return existing_primary
+
+        if is_primary:
+            await self._clear_primary_variant(
+                session,
+                molecule_id=molecule_id,
+                mode=mode,
+                locale=locale,
+                reject_demoted=replace_existing_primary,
+            )
 
         variant = NamingVariant(
             molecule_id=molecule_id,
@@ -555,6 +657,8 @@ class ContentService:
         molecule_id: str | None,
         mode: Mode,
         locale: Locale,
+        keep_variant_id: str | None = None,
+        reject_demoted: bool = False,
     ) -> None:
         if molecule_id is None:
             return
@@ -569,8 +673,13 @@ class ContentService:
             )
         ).all()
         for variant in variants:
+            if keep_variant_id is not None and variant.id == keep_variant_id:
+                continue
             variant.is_primary = False
-            if variant.review_status == ReviewStatus.APPROVED.value:
+            if reject_demoted:
+                variant.review_status = ReviewStatus.REJECTED.value
+                variant.kind = NamingKind.ACCEPTED_ALIAS.value
+            elif variant.review_status == ReviewStatus.APPROVED.value:
                 variant.kind = NamingKind.ACCEPTED_ALIAS.value
 
     async def _upsert_card(

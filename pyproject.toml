@@ -56,6 +56,7 @@ molquiz-generate-depictions = "molquiz.cli.generate_depictions:main"
 molquiz-review-export = "molquiz.cli.review_export:main"
 molquiz-review-apply = "molquiz.cli.review_apply:main"
 molquiz-publish-ready = "molquiz.cli.publish_ready:main"
+molquiz-sync-ru-iupac = "molquiz.cli.sync_ru_iupac:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/molquiz"]

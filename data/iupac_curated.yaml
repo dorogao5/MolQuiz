@@ -1014,7 +1014,7 @@ entries:
       en:
       - 6-bromo-3-(bromomethyl)-3,7-dichloro-7-methyloct-1-ene
       ru:
-      - 6-бромо-3-(бромометил)-3,7-дихлоро-7-метилокт-1-ен
+      - 6-бромо-3-(бромометил)-7-метил-3,7-дихлороокт-1-ен
 - canonical_smiles: CCCCCCCCCCCCC(O)C(=O)O
   source_ref: pubchem:cid:1563
   names:
@@ -1046,7 +1046,7 @@ entries:
       en:
       - 3-amino-1-chloro-4-phenylbutan-2-one
       ru:
-      - 3-амино-1-хлоро-4-фенилбутан-2-он
+      - 3-амино-4-фенил-1-хлоробутан-2-он
 - canonical_smiles: N#CCCN
   source_ref: pubchem:cid:1647
   names:
@@ -1094,7 +1094,7 @@ entries:
       en:
       - 4-chloro-3-methylphenol
       ru:
-      - 4-хлоро-3-метилфенол
+      - 3-метил-4-хлорофенол
 - canonical_smiles: COc1ccc(CCN)cc1O
   source_ref: pubchem:cid:1748
   names:
@@ -1190,7 +1190,7 @@ entries:
       en:
       - 4-chloro-3,5-dimethylphenol
       ru:
-      - 4-хлоро-3,5-диметилфенол
+      - 3,5-диметил-4-хлорофенол
 - canonical_smiles: Cc1ccc(O)cc1
   source_ref: pubchem:cid:2879
   names:
@@ -1382,7 +1382,7 @@ entries:
       en:
       - 2-(2-chlorophenyl)-2-(methylamino)cyclohexan-1-one
       ru:
-      - 2-(2-хлорофенил)-2-(метиламино)циклогексан-1-он
+      - 2-(метиламино)-2-(2-хлорофенил)циклогексан-1-он
 - canonical_smiles: O=C(O)C(O)Cc1ccccc1
   source_ref: pubchem:cid:3848
   names:
@@ -1550,7 +1550,7 @@ entries:
       en:
       - 2-amino-1-cyclohexyl-6-methylheptane-3,4-diol
       ru:
-      - 2-амино-1-циклогексил-6-метилгептан-3,4-диол
+      - 2-амино-6-метил-1-циклогексилгептан-3,4-диол
 - canonical_smiles: CC(C)(N)Cc1ccccc1
   source_ref: pubchem:cid:4771
   names:
@@ -1758,7 +1758,7 @@ entries:
       en:
       - 1,1,1-trichloro-2-methylpropan-2-ol
       ru:
-      - 1,1,1-трихлоро-2-метилпропан-2-ол
+      - 2-метил-1,1,1-трихлоропропан-2-ол
 - canonical_smiles: OCCc1ccccc1
   source_ref: pubchem:cid:6054
   names:
@@ -2158,7 +2158,7 @@ entries:
       en:
       - 1-chloro-1,1-difluoroethane
       ru:
-      - 1-хлоро-1,1-дифтороэтан
+      - 1,1-дифторо-1-хлороэтан
 - canonical_smiles: FC(Cl)(Cl)Cl
   source_ref: pubchem:cid:6389
   names:
@@ -2254,7 +2254,7 @@ entries:
       en:
       - 2-chloro-1,1,1-trifluoroethane
       ru:
-      - 2-хлоро-1,1,1-трифтороэтан
+      - 1,1,1-трифторо-2-хлороэтан
 - canonical_smiles: OCC(F)(F)F
   source_ref: pubchem:cid:6409
   names:
@@ -2366,7 +2366,7 @@ entries:
       en:
       - 2-ethyl-2-(hydroxymethyl)propane-1,3-diol
       ru:
-      - 2-этил-2-(гидроксиметил)пропан-1,3-диол
+      - 2-(гидроксиметил)-2-этилпропан-1,3-диол
 - canonical_smiles: CCC(C)(O)C#CC(C)(O)CC
   source_ref: pubchem:cid:6546
   names:
@@ -2590,7 +2590,7 @@ entries:
       en:
       - 1,1-dichloro-2,2-difluoroethene
       ru:
-      - 1,1-дихлоро-2,2-дифтороэтен
+      - 2,2-дифторо-1,1-дихлороэтен
 - canonical_smiles: FC(F)=C(F)Cl
   source_ref: pubchem:cid:6594
   names:
@@ -2598,7 +2598,7 @@ entries:
       en:
       - 1-chloro-1,2,2-trifluoroethene
       ru:
-      - 1-хлоро-1,2,2-трифтороэтен
+      - 1,2,2-трифторо-1-хлороэтен
 - canonical_smiles: CC(C)(O)C(C)(O)c1ccc(Cl)cc1
   source_ref: pubchem:cid:6617
   names:
@@ -2606,7 +2606,7 @@ entries:
       en:
       - 2-(4-chlorophenyl)-3-methylbutane-2,3-diol
       ru:
-      - 2-(4-хлорофенил)-3-метилбутан-2,3-диол
+      - 3-метил-2-(4-хлорофенил)бутан-2,3-диол
 - canonical_smiles: CCOC(=O)C(C)(C)O
   source_ref: pubchem:cid:6653
   names:
@@ -2670,7 +2670,7 @@ entries:
       en:
       - 1,3,5-trichloro-2-methoxybenzene
       ru:
-      - 1,3,5-трихлоро-2-метоксибензол
+      - 2-метокси-1,3,5-трихлоробензол
 - canonical_smiles: Cc1cccc(N)c1C
   source_ref: pubchem:cid:6893
   names:
@@ -2686,7 +2686,7 @@ entries:
       en:
       - 3-chloro-2-methylaniline
       ru:
-      - 3-хлоро-2-метиланилин
+      - 2-метил-3-хлороанилин
 - canonical_smiles: Clc1cccc(Cl)c1Cl
   source_ref: pubchem:cid:6895
   names:
@@ -2710,7 +2710,7 @@ entries:
       en:
       - 2-chloro-6-methylaniline
       ru:
-      - 2-хлоро-6-метиланилин
+      - 6-метил-2-хлороанилин
 - canonical_smiles: Cc1cccc(Cl)c1O
   source_ref: pubchem:cid:6898
   names:
@@ -2718,7 +2718,7 @@ entries:
       en:
       - 2-chloro-6-methylphenol
       ru:
-      - 2-хлоро-6-метилфенол
+      - 6-метил-2-хлорофенол
 - canonical_smiles: Oc1c(Cl)cccc1Cl
   source_ref: pubchem:cid:6899
   names:
@@ -2758,7 +2758,7 @@ entries:
       en:
       - 1-chloro-2-(trifluoromethyl)benzene
       ru:
-      - 1-хлоро-2-(трифторометил)бензол
+      - 2-(трифторометил)-1-хлоробензол
 - canonical_smiles: Nc1ccccc1C(F)(F)F
   source_ref: pubchem:cid:6922
   names:
@@ -2926,7 +2926,7 @@ entries:
       en:
       - 2-(diethylamino)-1-phenylpropan-1-one
       ru:
-      - 2-(диэтиламино)-1-фенилпропан-1-он
+      - 1-фенил-2-(диэтиламино)пропан-1-он
 - canonical_smiles: COc1cccc(OC)c1O
   source_ref: pubchem:cid:7041
   names:
@@ -2990,7 +2990,7 @@ entries:
       en:
       - 4-chloro-2-methoxyaniline
       ru:
-      - 4-хлоро-2-метоксианилин
+      - 2-метокси-4-хлороанилин
 - canonical_smiles: COc1cc(C)ccc1O
   source_ref: pubchem:cid:7144
   names:
@@ -2998,7 +2998,7 @@ entries:
       en:
       - 2-methoxy-4-methylphenol
       ru:
-      - 2-метокси-4-метилфенол
+      - 4-метил-2-метоксифенол
 - canonical_smiles: BrCC(Br)c1ccccc1
   source_ref: pubchem:cid:7145
   names:
@@ -3102,7 +3102,7 @@ entries:
       en:
       - 1-chloro-2-methylbenzene
       ru:
-      - 1-хлоро-2-метилбензол
+      - 2-метил-1-хлоробензол
 - canonical_smiles: Clc1ccccc1Cl
   source_ref: pubchem:cid:7239
   names:
@@ -3126,7 +3126,7 @@ entries:
       en:
       - 1-fluoro-2-methylbenzene
       ru:
-      - 1-фторо-2-метилбензол
+      - 2-метил-1-фторобензол
 - canonical_smiles: Cc1ccccc1N
   source_ref: pubchem:cid:7242
   names:
@@ -3198,7 +3198,7 @@ entries:
       en:
       - 4-chloro-2-methylaniline
       ru:
-      - 4-хлоро-2-метиланилин
+      - 2-метил-4-хлороанилин
 - canonical_smiles: Cc1cc(N)ccc1N
   source_ref: pubchem:cid:7252
   names:
@@ -3222,7 +3222,7 @@ entries:
       en:
       - 2,4-dichloro-1-methylbenzene
       ru:
-      - 2,4-дихлоро-1-метилбензол
+      - 1-метил-2,4-дихлоробензол
 - canonical_smiles: Cc1ccc(N)cc1Cl
   source_ref: pubchem:cid:7255
   names:
@@ -3230,7 +3230,7 @@ entries:
       en:
       - 3-chloro-4-methylaniline
       ru:
-      - 3-хлоро-4-метиланилин
+      - 4-метил-3-хлороанилин
 - canonical_smiles: Cc1ccc(Cl)c(Cl)c1
   source_ref: pubchem:cid:7256
   names:
@@ -3238,7 +3238,7 @@ entries:
       en:
       - 1,2-dichloro-4-methylbenzene
       ru:
-      - 1,2-дихлоро-4-метилбензол
+      - 4-метил-1,2-дихлоробензол
 - canonical_smiles: Nc1ccc(Cl)c(Cl)c1
   source_ref: pubchem:cid:7257
   names:
@@ -3270,7 +3270,7 @@ entries:
       en:
       - 5-chloro-2-methylaniline
       ru:
-      - 5-хлоро-2-метиланилин
+      - 2-метил-5-хлороанилин
 - canonical_smiles: Cc1ccc(N)cc1N
   source_ref: pubchem:cid:7261
   names:
@@ -3550,7 +3550,7 @@ entries:
       en:
       - 1-chloro-3-(trifluoromethyl)benzene
       ru:
-      - 1-хлоро-3-(трифторометил)бензол
+      - 3-(трифторометил)-1-хлоробензол
 - canonical_smiles: Nc1cccc(C(F)(F)F)c1
   source_ref: pubchem:cid:7375
   names:
@@ -3574,7 +3574,7 @@ entries:
       en:
       - 1-chloro-4-(trifluoromethyl)benzene
       ru:
-      - 1-хлоро-4-(трифторометил)бензол
+      - 4-(трифторометил)-1-хлоробензол
 - canonical_smiles: CC(N)c1ccccc1
   source_ref: pubchem:cid:7408
   names:
@@ -3806,7 +3806,7 @@ entries:
       en:
       - 1-methoxy-3-methylbenzene
       ru:
-      - 1-метокси-3-метилбензол
+      - 3-метил-1-метоксибензол
 - canonical_smiles: CC(C)(O)Cc1ccccc1
   source_ref: pubchem:cid:7531
   names:
@@ -3846,7 +3846,7 @@ entries:
       en:
       - 4-methoxy-2-methylaniline
       ru:
-      - 4-метокси-2-метиланилин
+      - 2-метил-4-метоксианилин
 - canonical_smiles: COc1ccc(OC)c(N)c1
   source_ref: pubchem:cid:7613
   names:
@@ -4054,7 +4054,7 @@ entries:
       en:
       - 1-(chloromethyl)-4-methylbenzene
       ru:
-      - 1-(хлорометил)-4-метилбензол
+      - 4-метил-1-(хлорометил)бензол
 - canonical_smiles: ClCc1ccc(Cl)cc1
   source_ref: pubchem:cid:7723
   names:
@@ -4102,7 +4102,7 @@ entries:
       en:
       - 1-methoxy-4-methylbenzene
       ru:
-      - 1-метокси-4-метилбензол
+      - 4-метил-1-метоксибензол
 - canonical_smiles: COc1ccc(N)cc1
   source_ref: pubchem:cid:7732
   names:
@@ -4358,7 +4358,7 @@ entries:
       en:
       - 1-chloro-4-methylbenzene
       ru:
-      - 1-хлоро-4-метилбензол
+      - 4-метил-1-хлоробензол
 - canonical_smiles: Nc1ccc(Cl)cc1
   source_ref: pubchem:cid:7812
   names:
@@ -4398,7 +4398,7 @@ entries:
       en:
       - 2-ethyl-4-methylpentan-1-ol
       ru:
-      - 2-этил-4-метилпентан-1-ол
+      - 4-метил-2-этилпентан-1-ол
 - canonical_smiles: CCC(=O)CC(C)CC
   source_ref: pubchem:cid:7822
   names:
@@ -4590,7 +4590,7 @@ entries:
       en:
       - 4-methoxy-4-methylpentan-2-one
       ru:
-      - 4-метокси-4-метилпентан-2-он
+      - 4-метил-4-метоксипентан-2-он
 - canonical_smiles: CC(C)CCCC(C)C(O)CO
   source_ref: pubchem:cid:7887
   names:
@@ -4646,7 +4646,7 @@ entries:
       en:
       - 1-chloro-3-methylbutane
       ru:
-      - 1-хлоро-3-метилбутан
+      - 3-метил-1-хлоробутан
 - canonical_smiles: CC(C)CCN
   source_ref: pubchem:cid:7894
   names:
@@ -4766,7 +4766,7 @@ entries:
       en:
       - 1-chloro-3-methylbenzene
       ru:
-      - 1-хлоро-3-метилбензол
+      - 3-метил-1-хлоробензол
 - canonical_smiles: Nc1cccc(Cl)c1
   source_ref: pubchem:cid:7932
   names:
@@ -5750,7 +5750,7 @@ entries:
       en:
       - 1,3-dichloro-2-methylbenzene
       ru:
-      - 1,3-дихлоро-2-метилбензол
+      - 2-метил-1,3-дихлоробензол
 - canonical_smiles: Cc1ccccc1C(=O)O
   source_ref: pubchem:cid:8373
   names:
@@ -5790,7 +5790,7 @@ entries:
       en:
       - 3-(dimethylamino)-4-methylphenol
       ru:
-      - 3-(диметиламино)-4-метилфенол
+      - 4-метил-3-(диметиламино)фенол
 - canonical_smiles: Oc1ccccc1C1CCCCC1
   source_ref: pubchem:cid:8396
   names:
@@ -5838,7 +5838,7 @@ entries:
       en:
       - 3-(ethylamino)-4-methylphenol
       ru:
-      - 3-(этиламино)-4-метилфенол
+      - 4-метил-3-(этиламино)фенол
 - canonical_smiles: CCC(=O)OC(C)c1ccccc1
   source_ref: pubchem:cid:8432
   names:
@@ -5854,7 +5854,7 @@ entries:
       en:
       - 2-methoxy-5-methylaniline
       ru:
-      - 2-метокси-5-метиланилин
+      - 5-метил-2-метоксианилин
 - canonical_smiles: Oc1ccc(Cl)cc1Cl
   source_ref: pubchem:cid:8449
   names:
@@ -5878,7 +5878,7 @@ entries:
       en:
       - 3-ethoxy-4-hydroxybenzaldehyde
       ru:
-      - 3-этокси-4-гидроксибензальдегид
+      - 4-гидрокси-3-этоксибензальдегид
 - canonical_smiles: COc1cc(C(=O)O)ccc1O
   source_ref: pubchem:cid:8468
   names:
@@ -5926,7 +5926,7 @@ entries:
       en:
       - 2,4-dichloro-3,5-dimethylphenol
       ru:
-      - 2,4-дихлоро-3,5-диметилфенол
+      - 3,5-диметил-2,4-дихлорофенол
 - canonical_smiles: Clc1ccc(C(Cl)Cl)c(Cl)c1
   source_ref: pubchem:cid:8637
   names:
@@ -6070,7 +6070,7 @@ entries:
       en:
       - 8,8-dimethoxy-2,6-dimethyloctan-2-ol
       ru:
-      - 8,8-диметокси-2,6-диметилоктан-2-ол
+      - 2,6-диметил-8,8-диметоксиоктан-2-ол
 - canonical_smiles: CCc1cccc(CC)c1
   source_ref: pubchem:cid:8864
   names:
@@ -6294,7 +6294,7 @@ entries:
       en:
       - 5-chloro-2-hydroxybenzoic acid
       ru:
-      - 5-хлоро-2-гидроксибензойная кислота
+      - 2-гидрокси-5-хлоробензойная кислота
 - canonical_smiles: NC(Cc1ccccc1F)C(=O)O
   source_ref: pubchem:cid:9465
   names:
@@ -6310,7 +6310,7 @@ entries:
       en:
       - 9-fluoro-1-phenylnonan-1-one
       ru:
-      - 9-фторо-1-фенилнонан-1-он
+      - 1-фенил-9-фторононан-1-он
 - canonical_smiles: Fc1cc(F)c(F)cc1F
   source_ref: pubchem:cid:9474
   names:
@@ -6366,7 +6366,7 @@ entries:
       en:
       - 8-fluoro-4,4-dimethyloctanoic acid
       ru:
-      - 8-фторо-4,4-диметилоктановая кислота
+      - 4,4-диметил-8-фторооктановая кислота
 - canonical_smiles: O=C(O)CCCCCCF
   source_ref: pubchem:cid:9534
   names:
@@ -6430,7 +6430,7 @@ entries:
       en:
       - 1-chloro-10-fluorodecane
       ru:
-      - 1-хлоро-10-фтородекан
+      - 10-фторо-1-хлородекан
 - canonical_smiles: FCCCCCCCCCCF
   source_ref: pubchem:cid:9545
   names:
@@ -6454,7 +6454,7 @@ entries:
       en:
       - 1-(chloromethyl)-2-fluorobenzene
       ru:
-      - 1-(хлорометил)-2-фторобензол
+      - 2-фторо-1-(хлорометил)бензол
 - canonical_smiles: Fc1ccccc1Cl
   source_ref: pubchem:cid:9583
   names:
@@ -6462,7 +6462,7 @@ entries:
       en:
       - 1-chloro-2-fluorobenzene
       ru:
-      - 1-хлоро-2-фторобензол
+      - 2-фторо-1-хлоробензол
 - canonical_smiles: Nc1ccccc1F
   source_ref: pubchem:cid:9584
   names:
@@ -6478,7 +6478,7 @@ entries:
       en:
       - 2-(ethylamino)-1-(3-fluorophenyl)ethanol
       ru:
-      - 2-(этиламино)-1-(3-фторофенил)этанол
+      - 1-(3-фторофенил)-2-(этиламино)этанол
 - canonical_smiles: FCc1ccccc1
   source_ref: pubchem:cid:9591
   names:
@@ -6494,7 +6494,7 @@ entries:
       en:
       - 1-(chloromethyl)-4-fluorobenzene
       ru:
-      - 1-(хлорометил)-4-фторобензол
+      - 4-фторо-1-(хлорометил)бензол
 - canonical_smiles: Cc1ccc(F)cc1
   source_ref: pubchem:cid:9603
   names:
@@ -6502,7 +6502,7 @@ entries:
       en:
       - 1-fluoro-4-methylbenzene
       ru:
-      - 1-фторо-4-метилбензол
+      - 4-метил-1-фторобензол
 - canonical_smiles: Fc1ccc(Cl)cc1
   source_ref: pubchem:cid:9604
   names:
@@ -6510,7 +6510,7 @@ entries:
       en:
       - 1-chloro-4-fluorobenzene
       ru:
-      - 1-хлоро-4-фторобензол
+      - 4-фторо-1-хлоробензол
 - canonical_smiles: Fc1ccc(I)cc1
   source_ref: pubchem:cid:9605
   names:
@@ -6518,7 +6518,7 @@ entries:
       en:
       - 1-fluoro-4-iodobenzene
       ru:
-      - 1-фторо-4-йодобензол
+      - 4-йодо-1-фторобензол
 - canonical_smiles: Cc1cccc(F)c1
   source_ref: pubchem:cid:9606
   names:
@@ -6526,7 +6526,7 @@ entries:
       en:
       - 1-fluoro-3-methylbenzene
       ru:
-      - 1-фторо-3-метилбензол
+      - 3-метил-1-фторобензол
 - canonical_smiles: CCOC(=O)CCCCCCCCCF
   source_ref: pubchem:cid:9611
   names:
@@ -6558,7 +6558,7 @@ entries:
       en:
       - 1-fluoro-6-methoxyhexane
       ru:
-      - 1-фторо-6-метоксигексан
+      - 6-метокси-1-фторогексан
 - canonical_smiles: O=C(O)CCCCCCCF
   source_ref: pubchem:cid:9616
   names:
@@ -6598,7 +6598,7 @@ entries:
       en:
       - 2-fluoro-2-methylpropane
       ru:
-      - 2-фторо-2-метилпропан
+      - 2-метил-2-фторопропан
 - canonical_smiles: FC=C(F)Cl
   source_ref: pubchem:cid:9662
   names:
@@ -6606,7 +6606,7 @@ entries:
       en:
       - 1-chloro-1,2-difluoroethene
       ru:
-      - 1-хлоро-1,2-дифтороэтен
+      - 1,2-дифторо-1-хлороэтен
 - canonical_smiles: FC(F)=CCl
   source_ref: pubchem:cid:9664
   names:
@@ -6614,7 +6614,7 @@ entries:
       en:
       - 2-chloro-1,1-difluoroethene
       ru:
-      - 2-хлоро-1,1-дифтороэтен
+      - 1,1-дифторо-2-хлороэтен
 - canonical_smiles: FC=C(F)F
   source_ref: pubchem:cid:9665
   names:
@@ -6630,7 +6630,7 @@ entries:
       en:
       - 1,1,2-trichloro-2-fluoroethane
       ru:
-      - 1,1,2-трихлоро-2-фтороэтан
+      - 2-фторо-1,1,2-трихлороэтан
 - canonical_smiles: FC(F)C(F)F
   source_ref: pubchem:cid:9667
   names:
@@ -6670,7 +6670,7 @@ entries:
       en:
       - 3-chloro-4-fluoroaniline
       ru:
-      - 3-хлоро-4-фтороанилин
+      - 4-фторо-3-хлороанилин
 - canonical_smiles: Nc1ccc(F)cc1F
   source_ref: pubchem:cid:9709
   names:
@@ -6774,7 +6774,7 @@ entries:
       en:
       - 1-fluoro-4-iodobutane
       ru:
-      - 1-фторо-4-йодобутан
+      - 4-йодо-1-фторобутан
 - canonical_smiles: OCCCCF
   source_ref: pubchem:cid:9755
   names:
@@ -6830,7 +6830,7 @@ entries:
       en:
       - 1-fluoro-6-iodohexane
       ru:
-      - 1-фторо-6-йодогексан
+      - 6-йодо-1-фторогексан
 - canonical_smiles: N#CCCCCCF
   source_ref: pubchem:cid:9767
   names:
@@ -6862,7 +6862,7 @@ entries:
       en:
       - 1-fluoro-5-methoxypentane
       ru:
-      - 1-фторо-5-метоксипентан
+      - 5-метокси-1-фторопентан
 - canonical_smiles: NCC(F)(F)F
   source_ref: pubchem:cid:9773
   names:
@@ -6894,7 +6894,7 @@ entries:
       en:
       - 1,2-dichloro-3,3-difluorobutane
       ru:
-      - 1,2-дихлоро-3,3-дифторобутан
+      - 3,3-дифторо-1,2-дихлоробутан
 - canonical_smiles: O=C(O)c1c(F)cccc1F
   source_ref: pubchem:cid:9796
   names:
@@ -7038,7 +7038,7 @@ entries:
       en:
       - 2-chloro-1,1-difluoro-1-methoxyethane
       ru:
-      - 2-хлоро-1,1-дифторо-1-метоксиэтан
+      - 1-метокси-1,1-дифторо-2-хлороэтан
 - canonical_smiles: CC(=O)CF
   source_ref: pubchem:cid:9889
   names:
@@ -7070,7 +7070,7 @@ entries:
       en:
       - 2,2,2-trifluoro-1-phenylethanone
       ru:
-      - 2,2,2-трифторо-1-фенилэтанон
+      - 1-фенил-2,2,2-трифтороэтанон
 - canonical_smiles: Cc1c(F)cccc1Cl
   source_ref: pubchem:cid:9933
   names:
@@ -7078,7 +7078,7 @@ entries:
       en:
       - 1-chloro-3-fluoro-2-methylbenzene
       ru:
-      - 1-хлоро-3-фторо-2-метилбензол
+      - 2-метил-3-фторо-1-хлоробензол
 - canonical_smiles: O=C(O)c1ccccc1F
   source_ref: pubchem:cid:9935
   names:
@@ -7094,7 +7094,7 @@ entries:
       en:
       - 2-fluoro-1-phenylethanol
       ru:
-      - 2-фторо-1-фенилэтанол
+      - 1-фенил-2-фтороэтанол
 - canonical_smiles: O=C(CF)c1ccccc1
   source_ref: pubchem:cid:9947
   names:
@@ -7102,7 +7102,7 @@ entries:
       en:
       - 2-fluoro-1-phenylethanone
       ru:
-      - 2-фторо-1-фенилэтанон
+      - 1-фенил-2-фтороэтанон
 - canonical_smiles: Cc1ccc(N)cc1F
   source_ref: pubchem:cid:9957
   names:
@@ -7110,7 +7110,7 @@ entries:
       en:
       - 3-fluoro-4-methylaniline
       ru:
-      - 3-фторо-4-метиланилин
+      - 4-метил-3-фтороанилин
 - canonical_smiles: Cc1ccc(O)c(O)c1
   source_ref: pubchem:cid:9958
   names:
@@ -7166,7 +7166,7 @@ entries:
       en:
       - 1-(chloromethyl)-3-fluorobenzene
       ru:
-      - 1-(хлорометил)-3-фторобензол
+      - 3-фторо-1-(хлорометил)бензол
 - canonical_smiles: COc1cccc(F)c1
   source_ref: pubchem:cid:9975
   names:
@@ -7174,7 +7174,7 @@ entries:
       en:
       - 1-fluoro-3-methoxybenzene
       ru:
-      - 1-фторо-3-метоксибензол
+      - 3-метокси-1-фторобензол
 - canonical_smiles: NC(Cc1cccc(F)c1)C(=O)O
   source_ref: pubchem:cid:9976
   names:
@@ -7190,7 +7190,7 @@ entries:
       en:
       - 2-fluoro-3-phenylpropanoic acid
       ru:
-      - 2-фторо-3-фенилпропановая кислота
+      - 3-фенил-2-фторопропановая кислота
 - canonical_smiles: CC(N)Cc1ccc(F)cc1
   source_ref: pubchem:cid:9986
   names:
@@ -7206,7 +7206,7 @@ entries:
       en:
       - 1-fluoro-4-methoxybenzene
       ru:
-      - 1-фторо-4-метоксибензол
+      - 4-метокси-1-фторобензол
 - canonical_smiles: CC(CCCCCCCF)CC(=O)O
   source_ref: pubchem:cid:9990
   names:
@@ -7214,7 +7214,7 @@ entries:
       en:
       - 10-fluoro-3-methyldecanoic acid
       ru:
-      - 10-фторо-3-метилдекановая кислота
+      - 3-метил-10-фтородекановая кислота
 - canonical_smiles: Fc1ccc(Br)cc1
   source_ref: pubchem:cid:9993
   names:
@@ -7246,7 +7246,7 @@ entries:
       en:
       - 3-chloro-1,1,1-trifluoropropane
       ru:
-      - 3-хлоро-1,1,1-трифторопропан
+      - 1,1,1-трифторо-3-хлоропропан
 - canonical_smiles: NCCC(F)(F)F
   source_ref: pubchem:cid:10001
   names:
@@ -7262,7 +7262,7 @@ entries:
       en:
       - 2-ethoxy-1,1,1-trifluoroethane
       ru:
-      - 2-этокси-1,1,1-трифтороэтан
+      - 1,1,1-трифторо-2-этоксиэтан
 - canonical_smiles: O=C(O)CCF
   source_ref: pubchem:cid:10004
   names:
@@ -7278,7 +7278,7 @@ entries:
       en:
       - 1-(4-chlorophenyl)-2-methylpropan-2-amine
       ru:
-      - 1-(4-хлорофенил)-2-метилпропан-2-амин
+      - 2-метил-1-(4-хлорофенил)пропан-2-амин
 - canonical_smiles: Fc1ccccc1
   source_ref: pubchem:cid:10008
   names:
@@ -7294,7 +7294,7 @@ entries:
       en:
       - 8-fluoro-3-methyloctanoic acid
       ru:
-      - 8-фторо-3-метилоктановая кислота
+      - 3-метил-8-фторооктановая кислота
 - canonical_smiles: CCCCCCC(=O)CCCCCC
   source_ref: pubchem:cid:10015
   names:
@@ -7334,7 +7334,7 @@ entries:
       en:
       - 1-chloro-4-fluorobutane
       ru:
-      - 1-хлоро-4-фторобутан
+      - 4-фторо-1-хлоробутан
 - canonical_smiles: CCOCOCC
   source_ref: pubchem:cid:10024
   names:
@@ -7382,7 +7382,7 @@ entries:
       en:
       - 1-chloro-9-fluorononane
       ru:
-      - 1-хлоро-9-фторононан
+      - 9-фторо-1-хлорононан
 - canonical_smiles: OCCCCCCCCCF
   source_ref: pubchem:cid:10032
   names:
@@ -7494,7 +7494,7 @@ entries:
       en:
       - 2-ethyl-3-hydroxyhexanal
       ru:
-      - 2-этил-3-гидроксигексаналь
+      - 3-гидрокси-2-этилгексаналь
 - canonical_smiles: Cc1ccc(N)c(N)c1
   source_ref: pubchem:cid:10332
   names:
@@ -7574,7 +7574,7 @@ entries:
       en:
       - 4-fluoro-3-iodobenzoic acid
       ru:
-      - 4-фторо-3-йодобензойная кислота
+      - 3-йодо-4-фторобензойная кислота
 - canonical_smiles: CCCCCc1cc(O)cc(O)c1
   source_ref: pubchem:cid:10377
   names:
@@ -7678,7 +7678,7 @@ entries:
       en:
       - 1-chloro-3-methylbut-2-ene
       ru:
-      - 1-хлоро-3-метилбут-2-ен
+      - 3-метил-1-хлоробут-2-ен
 - canonical_smiles: CC(C)CC(=O)O
   source_ref: pubchem:cid:10430
   names:
@@ -7758,7 +7758,7 @@ entries:
       en:
       - 2-chloro-2-methylpropane
       ru:
-      - 2-хлоро-2-метилпропан
+      - 2-метил-2-хлоропропан
 - canonical_smiles: IC(I)(I)I
   source_ref: pubchem:cid:10487
   names:
@@ -7774,7 +7774,7 @@ entries:
       en:
       - 2,3-dichloro-2-methylbutane
       ru:
-      - 2,3-дихлоро-2-метилбутан
+      - 2-метил-2,3-дихлоробутан
 - canonical_smiles: CCC(Br)(CC)C(N)=O
   source_ref: pubchem:cid:10535
   names:
@@ -7806,7 +7806,7 @@ entries:
       en:
       - 1-chloro-2-methylpropane
       ru:
-      - 1-хлоро-2-метилпропан
+      - 2-метил-1-хлоропропан
 - canonical_smiles: CC(C)=CCl
   source_ref: pubchem:cid:10555
   names:
@@ -7814,7 +7814,7 @@ entries:
       en:
       - 1-chloro-2-methylprop-1-ene
       ru:
-      - 1-хлоро-2-метилпроп-1-ен
+      - 2-метил-1-хлоропроп-1-ен
 - canonical_smiles: CC(C)CI
   source_ref: pubchem:cid:10556
   names:
@@ -7966,7 +7966,7 @@ entries:
       en:
       - 2-chloro-1-phenylethanone
       ru:
-      - 2-хлоро-1-фенилэтанон
+      - 1-фенил-2-хлороэтанон
 - canonical_smiles: Oc1ccccc1I
   source_ref: pubchem:cid:10784
   names:
@@ -8414,7 +8414,7 @@ entries:
       en:
       - 2,4,6-trichloro-3-methylphenol
       ru:
-      - 2,4,6-трихлоро-3-метилфенол
+      - 3-метил-2,4,6-трихлорофенол
 - canonical_smiles: CC(=O)c1ccccc1N
   source_ref: pubchem:cid:11086
   names:
@@ -8438,7 +8438,7 @@ entries:
       en:
       - 1-(chloromethyl)-2-methylbenzene
       ru:
-      - 1-(хлорометил)-2-метилбензол
+      - 2-метил-1-(хлорометил)бензол
 - canonical_smiles: CC(N)C(O)c1ccc(O)cc1
   source_ref: pubchem:cid:11099
   names:
@@ -8454,7 +8454,7 @@ entries:
       en:
       - 2,4-dichloro-1-methoxybenzene
       ru:
-      - 2,4-дихлоро-1-метоксибензол
+      - 1-метокси-2,4-дихлоробензол
 - canonical_smiles: Cc1ccc(C)c(Br)c1
   source_ref: pubchem:cid:11121
   names:
@@ -8654,7 +8654,7 @@ entries:
       en:
       - 3-chloro-2-methylprop-1-ene
       ru:
-      - 3-хлоро-2-метилпроп-1-ен
+      - 2-метил-3-хлоропроп-1-ен
 - canonical_smiles: C=CC(C)Cl
   source_ref: pubchem:cid:11242
   names:
@@ -9622,7 +9622,7 @@ entries:
       en:
       - 1-chloro-8-fluorooctane
       ru:
-      - 1-хлоро-8-фторооктан
+      - 8-фторо-1-хлорооктан
 - canonical_smiles: FCCCCCCCCF
   source_ref: pubchem:cid:11627
   names:
@@ -9654,7 +9654,7 @@ entries:
       en:
       - 1-(4-chlorobutoxy)-4-fluorobutane
       ru:
-      - 1-(4-хлоробутокси)-4-фторобутан
+      - 4-фторо-1-(4-хлоробутокси)бутан
 - canonical_smiles: FCCCCOCCCCF
   source_ref: pubchem:cid:11632
   names:
@@ -9774,7 +9774,7 @@ entries:
       en:
       - 1,1-dichloro-2-methylpropane
       ru:
-      - 1,1-дихлоро-2-метилпропан
+      - 2-метил-1,1-дихлоропропан
 - canonical_smiles: CCC(C)(C)I
   source_ref: pubchem:cid:11665
   names:
@@ -9990,7 +9990,7 @@ entries:
       en:
       - 1,2-dichloro-1,2-difluoroethene
       ru:
-      - 1,2-дихлоро-1,2-дифтороэтен
+      - 1,2-дифторо-1,2-дихлороэтен
 - canonical_smiles: CC=C(C)C(C)(C)C
   source_ref: pubchem:cid:11738
   names:
@@ -10174,7 +10174,7 @@ entries:
       en:
       - 3-ethyl-2-methylpentane
       ru:
-      - 3-этил-2-метилпентан
+      - 2-метил-3-этилпентан
 - canonical_smiles: O=C(O)c1cc(Br)ccc1Br
   source_ref: pubchem:cid:11891
   names:
@@ -10214,7 +10214,7 @@ entries:
       en:
       - 1-ethyl-2-methylbenzene
       ru:
-      - 1-этил-2-метилбензол
+      - 2-метил-1-этилбензол
 - canonical_smiles: Clc1ccccc1CBr
   source_ref: pubchem:cid:11905
   names:
@@ -10294,7 +10294,7 @@ entries:
       en:
       - 1-chloro-2-iodobenzene
       ru:
-      - 1-хлоро-2-йодобензол
+      - 2-йодо-1-хлоробензол
 - canonical_smiles: Ic1ccccc1I
   source_ref: pubchem:cid:11994
   names:
@@ -10366,7 +10366,7 @@ entries:
       en:
       - 2-chloro-4-methylaniline
       ru:
-      - 2-хлоро-4-метиланилин
+      - 4-метил-2-хлороанилин
 - canonical_smiles: Cc1ccc(Cl)c(O)c1
   source_ref: pubchem:cid:12008
   names:
@@ -10374,7 +10374,7 @@ entries:
       en:
       - 2-chloro-5-methylphenol
       ru:
-      - 2-хлоро-5-метилфенол
+      - 5-метил-2-хлорофенол
 - canonical_smiles: CCCCC(Br)C(=O)O
   source_ref: pubchem:cid:12013
   names:
@@ -10398,7 +10398,7 @@ entries:
       en:
       - 1-chloro-2-methylbutane
       ru:
-      - 1-хлоро-2-метилбутан
+      - 2-метил-1-хлоробутан
 - canonical_smiles: CCC(Cl)CC
   source_ref: pubchem:cid:12016
   names:
@@ -10598,7 +10598,7 @@ entries:
       en:
       - 1-ethyl-3-methylbenzene
       ru:
-      - 1-этил-3-метилбензол
+      - 3-метил-1-этилбензол
 - canonical_smiles: CCc1cccc(O)c1
   source_ref: pubchem:cid:12101
   names:
@@ -10614,7 +10614,7 @@ entries:
       en:
       - 1-(chloromethyl)-3-methylbenzene
       ru:
-      - 1-(хлорометил)-3-метилбензол
+      - 3-метил-1-(хлорометил)бензол
 - canonical_smiles: ClCc1cccc(Cl)c1
   source_ref: pubchem:cid:12103
   names:
@@ -10734,7 +10734,7 @@ entries:
       en:
       - 1-ethyl-4-methylbenzene
       ru:
-      - 1-этил-4-метилбензол
+      - 4-метил-1-этилбензол
 - canonical_smiles: N#Cc1ccc(Br)cc1
   source_ref: pubchem:cid:12162
   names:
@@ -10758,7 +10758,7 @@ entries:
       en:
       - 1-chloro-4-methoxybenzene
       ru:
-      - 1-хлоро-4-метоксибензол
+      - 4-метокси-1-хлоробензол
 - canonical_smiles: CCCC(O)CC
   source_ref: pubchem:cid:12178
   names:
@@ -10998,7 +10998,7 @@ entries:
       en:
       - 1-methoxy-2-methylpropane
       ru:
-      - 1-метокси-2-метилпропан
+      - 2-метил-1-метоксипропан
 - canonical_smiles: CCOC(C)C
   source_ref: pubchem:cid:12256
   names:
@@ -11046,7 +11046,7 @@ entries:
       en:
       - 1-chloro-3-iodobenzene
       ru:
-      - 1-хлоро-3-йодобензол
+      - 3-йодо-1-хлоробензол
 - canonical_smiles: Ic1cccc(I)c1
   source_ref: pubchem:cid:12270
   names:
@@ -11230,7 +11230,7 @@ entries:
       en:
       - 1-chloro-2-methoxyethane
       ru:
-      - 1-хлоро-2-метоксиэтан
+      - 2-метокси-1-хлороэтан
 - canonical_smiles: COCCF
   source_ref: pubchem:cid:12317
   names:
@@ -11238,7 +11238,7 @@ entries:
       en:
       - 1-fluoro-2-methoxyethane
       ru:
-      - 1-фторо-2-метоксиэтан
+      - 2-метокси-1-фтороэтан
 - canonical_smiles: CC(C)CCC(C)O
   source_ref: pubchem:cid:12323
   names:
@@ -11678,7 +11678,7 @@ entries:
       en:
       - 5-chloro-2-hydroxybenzaldehyde
       ru:
-      - 5-хлоро-2-гидроксибензальдегид
+      - 2-гидрокси-5-хлоробензальдегид
 - canonical_smiles: Brc1cc(Br)c(Br)cc1Br
   source_ref: pubchem:cid:12486
   names:
@@ -11726,7 +11726,7 @@ entries:
       en:
       - 1-chloro-4-iodobenzene
       ru:
-      - 1-хлоро-4-йодобензол
+      - 4-йодо-1-хлоробензол
 - canonical_smiles: O=C1CCC(=O)CC1
   source_ref: pubchem:cid:12511
   names:
@@ -11742,7 +11742,7 @@ entries:
       en:
       - 2-ethoxy-2-methylpropane
       ru:
-      - 2-этокси-2-метилпропан
+      - 2-метил-2-этоксипропан
 - canonical_smiles: CCCC(C)I
   source_ref: pubchem:cid:12513
   names:
@@ -12038,7 +12038,7 @@ entries:
       en:
       - 2,6-dichloro-4-iodoaniline
       ru:
-      - 2,6-дихлоро-4-йодоанилин
+      - 4-йодо-2,6-дихлороанилин
 - canonical_smiles: CCc1cc(C)cc(O)c1
   source_ref: pubchem:cid:12775
   names:
@@ -12046,7 +12046,7 @@ entries:
       en:
       - 3-ethyl-5-methylphenol
       ru:
-      - 3-этил-5-метилфенол
+      - 5-метил-3-этилфенол
 - canonical_smiles: Cc1cc(O)c(C)c(C)c1O
   source_ref: pubchem:cid:12785
   names:
@@ -12078,7 +12078,7 @@ entries:
       en:
       - 1-chloro-2,2-dimethylpropane
       ru:
-      - 1-хлоро-2,2-диметилпропан
+      - 2,2-диметил-1-хлоропропан
 - canonical_smiles: CC(C)(C)C(N)=O
   source_ref: pubchem:cid:12957
   names:
@@ -12094,7 +12094,7 @@ entries:
       en:
       - 1-bromo-1-chloro-2,2-difluoroethene
       ru:
-      - 1-бромо-1-хлоро-2,2-дифтороэтен
+      - 1-бромо-2,2-дифторо-1-хлороэтен
 - canonical_smiles: C=CC(C)CC
   source_ref: pubchem:cid:12969
   names:
@@ -12142,7 +12142,7 @@ entries:
       en:
       - 1-chloro-2-fluoroethane
       ru:
-      - 1-хлоро-2-фтороэтан
+      - 2-фторо-1-хлороэтан
 - canonical_smiles: C=CCC(C)(C)C
   source_ref: pubchem:cid:12984
   names:
@@ -12222,7 +12222,7 @@ entries:
       en:
       - 1-chloro-2-methoxybenzene
       ru:
-      - 1-хлоро-2-метоксибензол
+      - 2-метокси-1-хлоробензол
 - canonical_smiles: O=C1CCCCCC1Cl
   source_ref: pubchem:cid:13012
   names:
@@ -12590,7 +12590,7 @@ entries:
       en:
       - 1-ethyl-2,4-dimethylbenzene
       ru:
-      - 1-этил-2,4-диметилбензол
+      - 2,4-диметил-1-этилбензол
 - canonical_smiles: O=Cc1ccc(Cl)cc1Cl
   source_ref: pubchem:cid:13404
   names:
@@ -12606,7 +12606,7 @@ entries:
       en:
       - 1,2,4,5-tetrachloro-3,6-dimethylbenzene
       ru:
-      - 1,2,4,5-тетрахлоро-3,6-диметилбензол
+      - 3,6-диметил-1,2,4,5-тетрахлоробензол
 - canonical_smiles: CCc1ccc(CC)c(CC)c1
   source_ref: pubchem:cid:13415
   names:
@@ -12630,7 +12630,7 @@ entries:
       en:
       - 2-chloro-2-methylpropanal
       ru:
-      - 2-хлоро-2-метилпропаналь
+      - 2-метил-2-хлоропропаналь
 - canonical_smiles: CC(=O)C(Cl)(Cl)Cl
   source_ref: pubchem:cid:13514
   names:
@@ -12646,7 +12646,7 @@ entries:
       en:
       - 2-ethoxy-2-methylbutane
       ru:
-      - 2-этокси-2-метилбутан
+      - 2-метил-2-этоксибутан
 - canonical_smiles: O=C(CCl)C(Cl)Cl
   source_ref: pubchem:cid:13530
   names:
@@ -12846,7 +12846,7 @@ entries:
       en:
       - 1-ethyl-2,3-dimethylbenzene
       ru:
-      - 1-этил-2,3-диметилбензол
+      - 2,3-диметил-1-этилбензол
 - canonical_smiles: COc1cccc(O)c1O
   source_ref: pubchem:cid:13622
   names:
@@ -12862,7 +12862,7 @@ entries:
       en:
       - 1-ethyl-3,5-dimethylbenzene
       ru:
-      - 1-этил-3,5-диметилбензол
+      - 3,5-диметил-1-этилбензол
 - canonical_smiles: CCc1ccc(C)c(C)c1
   source_ref: pubchem:cid:13629
   names:
@@ -12870,7 +12870,7 @@ entries:
       en:
       - 4-ethyl-1,2-dimethylbenzene
       ru:
-      - 4-этил-1,2-диметилбензол
+      - 1,2-диметил-4-этилбензол
 - canonical_smiles: C1=CCCCCCCCC1
   source_ref: pubchem:cid:13633
   names:
@@ -12910,7 +12910,7 @@ entries:
       en:
       - 1-(2-ethoxyethoxy)-2-methoxyethane
       ru:
-      - 1-(2-этоксиэтокси)-2-метоксиэтан
+      - 2-метокси-1-(2-этоксиэтокси)этан
 - canonical_smiles: CCCCCCCCCCCl
   source_ref: pubchem:cid:13848
   names:
@@ -12926,7 +12926,7 @@ entries:
       en:
       - 1,2,4,5-tetrachloro-3-methylbenzene
       ru:
-      - 1,2,4,5-тетрахлоро-3-метилбензол
+      - 3-метил-1,2,4,5-тетрахлоробензол
 - canonical_smiles: Cc1cc(Cl)c(Cl)c(Cl)c1Cl
   source_ref: pubchem:cid:13871
   names:
@@ -12934,7 +12934,7 @@ entries:
       en:
       - 1,2,3,4-tetrachloro-5-methylbenzene
       ru:
-      - 1,2,3,4-тетрахлоро-5-метилбензол
+      - 5-метил-1,2,3,4-тетрахлоробензол
 - canonical_smiles: CC(C)(C)Cc1ccccc1
   source_ref: pubchem:cid:13877
   names:
@@ -12974,7 +12974,7 @@ entries:
       en:
       - 3-ethyl-3-methylpentane
       ru:
-      - 3-этил-3-метилпентан
+      - 3-метил-3-этилпентан
 - canonical_smiles: CCC(CC)(CC)CC
   source_ref: pubchem:cid:14020
   names:
@@ -12990,7 +12990,7 @@ entries:
       en:
       - 3-ethyl-2,4-dimethylpentane
       ru:
-      - 3-этил-2,4-диметилпентан
+      - 2,4-диметил-3-этилпентан
 - canonical_smiles: CC(C)CC(C)C(C)C
   source_ref: pubchem:cid:14045
   names:
@@ -13446,7 +13446,7 @@ entries:
       en:
       - 2-methoxy-5-methylphenol
       ru:
-      - 2-метокси-5-метилфенол
+      - 5-метил-2-метоксифенол
 - canonical_smiles: Cc1ccc(C(C)(C)O)cc1
   source_ref: pubchem:cid:14529
   names:
@@ -13502,7 +13502,7 @@ entries:
       en:
       - 2-chloro-4-methylphenol
       ru:
-      - 2-хлоро-4-метилфенол
+      - 4-метил-2-хлорофенол
 - canonical_smiles: Cc1cccc(O)c1Cl
   source_ref: pubchem:cid:14852
   names:
@@ -13510,7 +13510,7 @@ entries:
       en:
       - 2-chloro-3-methylphenol
       ru:
-      - 2-хлоро-3-метилфенол
+      - 3-метил-2-хлорофенол
 - canonical_smiles: Cc1ccc(O)cc1Cl
   source_ref: pubchem:cid:14853
   names:
@@ -13518,7 +13518,7 @@ entries:
       en:
       - 3-chloro-4-methylphenol
       ru:
-      - 3-хлоро-4-метилфенол
+      - 4-метил-3-хлорофенол
 - canonical_smiles: Cc1cc(O)cc(Cl)c1
   source_ref: pubchem:cid:14854
   names:
@@ -13526,7 +13526,7 @@ entries:
       en:
       - 3-chloro-5-methylphenol
       ru:
-      - 3-хлоро-5-метилфенол
+      - 5-метил-3-хлорофенол
 - canonical_smiles: Cc1cc(Cl)ccc1O
   source_ref: pubchem:cid:14855
   names:
@@ -13534,7 +13534,7 @@ entries:
       en:
       - 4-chloro-2-methylphenol
       ru:
-      - 4-хлоро-2-метилфенол
+      - 2-метил-4-хлорофенол
 - canonical_smiles: Cc1c(O)cccc1Cl
   source_ref: pubchem:cid:14856
   names:
@@ -13542,7 +13542,7 @@ entries:
       en:
       - 3-chloro-2-methylphenol
       ru:
-      - 3-хлоро-2-метилфенол
+      - 2-метил-3-хлорофенол
 - canonical_smiles: CCC(CO)CCCCO
   source_ref: pubchem:cid:14859
   names:
@@ -13822,7 +13822,7 @@ entries:
       en:
       - 1-chloro-6-fluorohexane
       ru:
-      - 1-хлоро-6-фторогексан
+      - 6-фторо-1-хлорогексан
 - canonical_smiles: CCCCC(C)(O)C#CCCO
   source_ref: pubchem:cid:15259
   names:
@@ -13910,7 +13910,7 @@ entries:
       en:
       - 2,4-dichloro-6-methylphenol
       ru:
-      - 2,4-дихлоро-6-метилфенол
+      - 6-метил-2,4-дихлорофенол
 - canonical_smiles: OCC(CO)C1CCCCC1
   source_ref: pubchem:cid:15293
   names:
@@ -13942,7 +13942,7 @@ entries:
       en:
       - 2-fluoro-3-methylbutanoic acid
       ru:
-      - 2-фторо-3-метилбутановая кислота
+      - 3-метил-2-фторобутановая кислота
 - canonical_smiles: CCc1ccc(Br)cc1
   source_ref: pubchem:cid:15313
   names:
@@ -13998,7 +13998,7 @@ entries:
       en:
       - 1-chloro-1-fluoroethane
       ru:
-      - 1-хлоро-1-фтороэтан
+      - 1-фторо-1-хлороэтан
 - canonical_smiles: CCOC(=O)C(C)(C)C(=O)OCC
   source_ref: pubchem:cid:15382
   names:
@@ -14014,7 +14014,7 @@ entries:
       en:
       - 2-methoxy-2-methylpropane
       ru:
-      - 2-метокси-2-метилпропан
+      - 2-метил-2-метоксипропан
 - canonical_smiles: C1CCC(C2CCCC2)C1
   source_ref: pubchem:cid:15417
   names:
@@ -14062,7 +14062,7 @@ entries:
       en:
       - 1,2-dichloro-1,1-difluoroethane
       ru:
-      - 1,2-дихлоро-1,1-дифтороэтан
+      - 1,1-дифторо-1,2-дихлороэтан
 - canonical_smiles: CCCCCCCCCCCC(C)O
   source_ref: pubchem:cid:15449
   names:
@@ -14094,7 +14094,7 @@ entries:
       en:
       - 2-chloro-1,3,5-trimethylbenzene
       ru:
-      - 2-хлоро-1,3,5-триметилбензол
+      - 1,3,5-триметил-2-хлоробензол
 - canonical_smiles: CC1=C(C)CCCC1
   source_ref: pubchem:cid:15480
   names:
@@ -14166,7 +14166,7 @@ entries:
       en:
       - 2-ethyl-5-methylphenol
       ru:
-      - 2-этил-5-метилфенол
+      - 5-метил-2-этилфенол
 - canonical_smiles: CCCC(=O)c1ccc(N)cc1
   source_ref: pubchem:cid:15527
   names:
@@ -14206,7 +14206,7 @@ entries:
       en:
       - 1,1-dichloro-1-fluoroethane
       ru:
-      - 1,1-дихлоро-1-фтороэтан
+      - 1-фторо-1,1-дихлороэтан
 - canonical_smiles: CCCCCCCCCC
   source_ref: pubchem:cid:15600
   names:
@@ -14262,7 +14262,7 @@ entries:
       en:
       - 1,1-dimethoxy-2-methylpropane
       ru:
-      - 1,1-диметокси-2-метилпропан
+      - 2-метил-1,1-диметоксипропан
 - canonical_smiles: CCC1=C(c2ccc(OC)cc2)CCC(C(=O)O)C1C
   source_ref: pubchem:cid:15644
   names:
@@ -14270,7 +14270,7 @@ entries:
       en:
       - 3-ethyl-4-(4-methoxyphenyl)-2-methylcyclohex-3-ene-1-carboxylic acid
       ru:
-      - 3-этил-4-(4-метоксифенил)-2-метилциклогекс-3-ен-1-карбоновая кислота
+      - 2-метил-4-(4-метоксифенил)-3-этилциклогекс-3-ен-1-карбоновая кислота
 - canonical_smiles: CC1CCC(=O)C1
   source_ref: pubchem:cid:15650
   names:
@@ -14286,7 +14286,7 @@ entries:
       en:
       - 2-ethyl-1,4-dimethylbenzene
       ru:
-      - 2-этил-1,4-диметилбензол
+      - 1,4-диметил-2-этилбензол
 - canonical_smiles: O=C(O)C1CC1
   source_ref: pubchem:cid:15655
   names:
@@ -14566,7 +14566,7 @@ entries:
       en:
       - 1,4-dichloro-2-methoxybenzene
       ru:
-      - 1,4-дихлоро-2-метоксибензол
+      - 2-метокси-1,4-дихлоробензол
 - canonical_smiles: COc1cccc(Cl)c1Cl
   source_ref: pubchem:cid:16126
   names:
@@ -14574,7 +14574,7 @@ entries:
       en:
       - 1,2-dichloro-3-methoxybenzene
       ru:
-      - 1,2-дихлоро-3-метоксибензол
+      - 3-метокси-1,2-дихлоробензол
 - canonical_smiles: COc1c(Cl)cccc1Cl
   source_ref: pubchem:cid:16127
   names:
@@ -14582,7 +14582,7 @@ entries:
       en:
       - 1,3-dichloro-2-methoxybenzene
       ru:
-      - 1,3-дихлоро-2-метоксибензол
+      - 2-метокси-1,3-дихлоробензол
 - canonical_smiles: CCCCCCCc1ccc(O)cc1
   source_ref: pubchem:cid:16143
   names:
@@ -14598,7 +14598,7 @@ entries:
       en:
       - 2,2,2-trichloro-1-phenylethanol
       ru:
-      - 2,2,2-трихлоро-1-фенилэтанол
+      - 1-фенил-2,2,2-трихлороэтанол
 - canonical_smiles: CC(C)C(C(=O)O)c1ccc(Cl)cc1
   source_ref: pubchem:cid:16197
   names:
@@ -14606,7 +14606,7 @@ entries:
       en:
       - 2-(4-chlorophenyl)-3-methylbutanoic acid
       ru:
-      - 2-(4-хлорофенил)-3-метилбутановая кислота
+      - 3-метил-2-(4-хлорофенил)бутановая кислота
 - canonical_smiles: CCN(CC)C(C)C(=O)Oc1c(C)cccc1C
   source_ref: pubchem:cid:16207
   names:
@@ -14782,7 +14782,7 @@ entries:
       en:
       - 1,3-diethyl-5-methylbenzene
       ru:
-      - 1,3-диэтил-5-метилбензол
+      - 5-метил-1,3-диэтилбензол
 - canonical_smiles: CCCCCCCCCCI
   source_ref: pubchem:cid:16314
   names:
@@ -14814,7 +14814,7 @@ entries:
       en:
       - 2-(cyclohexylamino)-1-phenylpropan-1-ol
       ru:
-      - 2-(циклогексиламино)-1-фенилпропан-1-ол
+      - 1-фенил-2-(циклогексиламино)пропан-1-ол
 - canonical_smiles: O=C(O)CCCCBr
   source_ref: pubchem:cid:16368
   names:
@@ -14830,7 +14830,7 @@ entries:
       en:
       - 1,2,4-trichloro-3-methylbenzene
       ru:
-      - 1,2,4-трихлоро-3-метилбензол
+      - 3-метил-1,2,4-трихлоробензол
 - canonical_smiles: OC1(c2ccccc2)CCCCCC1
   source_ref: pubchem:cid:16385
   names:
@@ -15142,7 +15142,7 @@ entries:
       en:
       - 3,5-dichloro-4-hydroxybenzaldehyde
       ru:
-      - 3,5-дихлоро-4-гидроксибензальдегид
+      - 4-гидрокси-3,5-дихлоробензальдегид
 - canonical_smiles: FC(F)(F)I
   source_ref: pubchem:cid:16843
   names:
@@ -15166,7 +15166,7 @@ entries:
       en:
       - 1-chloro-5-methylheptane
       ru:
-      - 1-хлоро-5-метилгептан
+      - 5-метил-1-хлорогептан
 - canonical_smiles: Cc1cc(Br)ccc1O
   source_ref: pubchem:cid:16896
   names:
@@ -15318,7 +15318,7 @@ entries:
       en:
       - 3-chloro-4-hydroxybenzaldehyde
       ru:
-      - 3-хлоро-4-гидроксибензальдегид
+      - 4-гидрокси-3-хлоробензальдегид
 - canonical_smiles: CCCCCCCCCCCCCCCl
   source_ref: pubchem:cid:17043
   names:
@@ -15358,7 +15358,7 @@ entries:
       en:
       - 2,6-dichloro-4-methylphenol
       ru:
-      - 2,6-дихлоро-4-метилфенол
+      - 4-метил-2,6-дихлорофенол
 - canonical_smiles: Cc1cc(Br)c(O)c(Br)c1
   source_ref: pubchem:cid:17078
   names:
@@ -15438,7 +15438,7 @@ entries:
       en:
       - 4,5-dichloro-2-methoxyphenol
       ru:
-      - 4,5-дихлоро-2-метоксифенол
+      - 2-метокси-4,5-дихлорофенол
 - canonical_smiles: ClCCCCC(Cl)(Cl)Cl
   source_ref: pubchem:cid:17175
   names:
@@ -15606,7 +15606,7 @@ entries:
       en:
       - 1,4-dichloro-2,5-dimethoxybenzene
       ru:
-      - 1,4-дихлоро-2,5-диметоксибензол
+      - 2,5-диметокси-1,4-дихлоробензол
 - canonical_smiles: COc1ccc(Cl)c(OC)c1OC
   source_ref: pubchem:cid:17582
   names:
@@ -15614,7 +15614,7 @@ entries:
       en:
       - 1-chloro-2,3,4-trimethoxybenzene
       ru:
-      - 1-хлоро-2,3,4-триметоксибензол
+      - 2,3,4-триметокси-1-хлоробензол
 - canonical_smiles: CCOC(C)CC
   source_ref: pubchem:cid:17586
   names:
@@ -15662,7 +15662,7 @@ entries:
       en:
       - 1,2-dichloro-4,5-dimethoxybenzene
       ru:
-      - 1,2-дихлоро-4,5-диметоксибензол
+      - 4,5-диметокси-1,2-дихлоробензол
 - canonical_smiles: Cc1cc(C)c(O)c(O)c1
   source_ref: pubchem:cid:17737
   names:
@@ -15694,7 +15694,7 @@ entries:
       en:
       - 1-(3-fluorophenyl)-2-(methylamino)ethanol
       ru:
-      - 1-(3-фторофенил)-2-(метиламино)этанол
+      - 2-(метиламино)-1-(3-фторофенил)этанол
 - canonical_smiles: CCOCCC=O
   source_ref: pubchem:cid:17755
   names:
@@ -15718,7 +15718,7 @@ entries:
       en:
       - 4-(dimethylamino)-2-methyl-2-phenylbutanenitrile
       ru:
-      - 4-(диметиламино)-2-метил-2-фенилбутаннитрил
+      - 2-метил-4-(диметиламино)-2-фенилбутаннитрил
 - canonical_smiles: CCC(C#N)(CCN(C)C)c1ccccc1
   source_ref: pubchem:cid:17759
   names:
@@ -15726,7 +15726,7 @@ entries:
       en:
       - 4-(dimethylamino)-2-ethyl-2-phenylbutanenitrile
       ru:
-      - 4-(диметиламино)-2-этил-2-фенилбутаннитрил
+      - 4-(диметиламино)-2-фенил-2-этилбутаннитрил
 - canonical_smiles: CC#CCCCCC
   source_ref: pubchem:cid:17769
   names:
@@ -15822,7 +15822,7 @@ entries:
       en:
       - 1-chloro-3-methoxybenzene
       ru:
-      - 1-хлоро-3-метоксибензол
+      - 3-метокси-1-хлоробензол
 - canonical_smiles: CCCCCCC(C)CCC
   source_ref: pubchem:cid:17835
   names:
@@ -15846,7 +15846,7 @@ entries:
       en:
       - 2-ethyl-1,3-dimethylbenzene
       ru:
-      - 2-этил-1,3-диметилбензол
+      - 1,3-диметил-2-этилбензол
 - canonical_smiles: CCCCCCCCCC1CCCCC1
   source_ref: pubchem:cid:17900
   names:
@@ -15934,7 +15934,7 @@ entries:
       en:
       - 4-(dimethylamino)-2-methyl-2-phenylbutanamide
       ru:
-      - 4-(диметиламино)-2-метил-2-фенилбутанамид
+      - 2-метил-4-(диметиламино)-2-фенилбутанамид
 - canonical_smiles: CCC(CCN(C)C)(C(N)=O)c1ccccc1
   source_ref: pubchem:cid:18107
   names:
@@ -15942,7 +15942,7 @@ entries:
       en:
       - 4-(dimethylamino)-2-ethyl-2-phenylbutanamide
       ru:
-      - 4-(диметиламино)-2-этил-2-фенилбутанамид
+      - 4-(диметиламино)-2-фенил-2-этилбутанамид
 - canonical_smiles: CC(Br)CCl
   source_ref: pubchem:cid:18175
   names:
@@ -16006,7 +16006,7 @@ entries:
       en:
       - 4-ethyl-2-methylhexane
       ru:
-      - 4-этил-2-метилгексан
+      - 2-метил-4-этилгексан
 - canonical_smiles: CCCC(C)(CC)CC
   source_ref: pubchem:cid:18313
   names:
@@ -16014,7 +16014,7 @@ entries:
       en:
       - 3-ethyl-3-methylhexane
       ru:
-      - 3-этил-3-метилгексан
+      - 3-метил-3-этилгексан
 - canonical_smiles: CCC(C)C(CC)CC
   source_ref: pubchem:cid:18314
   names:
@@ -16022,7 +16022,7 @@ entries:
       en:
       - 3-ethyl-4-methylhexane
       ru:
-      - 3-этил-4-метилгексан
+      - 4-метил-3-этилгексан
 - canonical_smiles: NC1CCC(N)CC1
   source_ref: pubchem:cid:18374
   names:
@@ -16102,7 +16102,7 @@ entries:
       en:
       - 6-(dimethylamino)-5,5-dimethylheptan-2-one
       ru:
-      - 6-(диметиламино)-5,5-диметилгептан-2-он
+      - 5,5-диметил-6-(диметиламино)гептан-2-он
 - canonical_smiles: Oc1c(Cl)cc(Br)cc1Cl
   source_ref: pubchem:cid:18587
   names:
@@ -16246,7 +16246,7 @@ entries:
       en:
       - 2,6-dichloro-4-hydroxybenzonitrile
       ru:
-      - 2,6-дихлоро-4-гидроксибензонитрил
+      - 4-гидрокси-2,6-дихлоробензонитрил
 - canonical_smiles: N#Cc1c(Cl)ccc(O)c1Cl
   source_ref: pubchem:cid:18748
   names:
@@ -16254,7 +16254,7 @@ entries:
       en:
       - 2,6-dichloro-3-hydroxybenzonitrile
       ru:
-      - 2,6-дихлоро-3-гидроксибензонитрил
+      - 3-гидрокси-2,6-дихлоробензонитрил
 - canonical_smiles: CC(=CCl)CCl
   source_ref: pubchem:cid:18801
   names:
@@ -16262,7 +16262,7 @@ entries:
       en:
       - 1,3-dichloro-2-methylprop-1-ene
       ru:
-      - 1,3-дихлоро-2-метилпроп-1-ен
+      - 2-метил-1,3-дихлоропроп-1-ен
 - canonical_smiles: CCCCC(C)Br
   source_ref: pubchem:cid:18805
   names:
@@ -16430,7 +16430,7 @@ entries:
       en:
       - 7-methoxy-3,7-dimethyloctanal
       ru:
-      - 7-метокси-3,7-диметилоктаналь
+      - 3,7-диметил-7-метоксиоктаналь
 - canonical_smiles: CCCCc1ccc(N)c(N)c1
   source_ref: pubchem:cid:19313
   names:
@@ -16478,7 +16478,7 @@ entries:
       en:
       - 1-ethyl-3-methylcyclopentane
       ru:
-      - 1-этил-3-метилциклопентан
+      - 3-метил-1-этилциклопентан
 - canonical_smiles: CCC1CCC(C)CC1
   source_ref: pubchem:cid:19503
   names:
@@ -16486,7 +16486,7 @@ entries:
       en:
       - 1-ethyl-4-methylcyclohexane
       ru:
-      - 1-этил-4-метилциклогексан
+      - 4-метил-1-этилциклогексан
 - canonical_smiles: CC(C)CCC(C)(C)O
   source_ref: pubchem:cid:19506
   names:
@@ -16534,7 +16534,7 @@ entries:
       en:
       - 1,1-diethoxy-3-methylbutane
       ru:
-      - 1,1-диэтокси-3-метилбутан
+      - 3-метил-1,1-диэтоксибутан
 - canonical_smiles: CCCC(=O)C(C)=O
   source_ref: pubchem:cid:19707
   names:
@@ -16566,7 +16566,7 @@ entries:
       en:
       - 7-(dimethylamino)-6,6-dimethylnonan-3-one
       ru:
-      - 7-(диметиламино)-6,6-диметилнонан-3-он
+      - 6,6-диметил-7-(диметиламино)нонан-3-он
 - canonical_smiles: O=C(CCCCl)c1ccc(F)cc1
   source_ref: pubchem:cid:19750
   names:
@@ -16574,7 +16574,7 @@ entries:
       en:
       - 4-chloro-1-(4-fluorophenyl)butan-1-one
       ru:
-      - 4-хлоро-1-(4-фторофенил)бутан-1-он
+      - 1-(4-фторофенил)-4-хлоробутан-1-он
 - canonical_smiles: CC1(C)C(=O)CCC1=O
   source_ref: pubchem:cid:19763
   names:
@@ -16654,7 +16654,7 @@ entries:
       en:
       - 3-chloro-4-hydroxybenzoic acid
       ru:
-      - 3-хлоро-4-гидроксибензойная кислота
+      - 4-гидрокси-3-хлоробензойная кислота
 - canonical_smiles: CCC(O)C(C)(C)C
   source_ref: pubchem:cid:19871
   names:
@@ -16838,7 +16838,7 @@ entries:
       en:
       - 2-ethyl-3-methylpentanamide
       ru:
-      - 2-этил-3-метилпентанамид
+      - 3-метил-2-этилпентанамид
 - canonical_smiles: Cc1cc(C#N)cc(C)c1O
   source_ref: pubchem:cid:20176
   names:
@@ -17254,7 +17254,7 @@ entries:
       en:
       - 3,3,3-trichloro-2-methylprop-1-ene
       ru:
-      - 3,3,3-трихлоро-2-метилпроп-1-ен
+      - 2-метил-3,3,3-трихлоропроп-1-ен
 - canonical_smiles: O=C(O)C1CC=CCC1
   source_ref: pubchem:cid:20903
   names:
@@ -17374,7 +17374,7 @@ entries:
       en:
       - 3,5-diethyl-4-hydroxybenzonitrile
       ru:
-      - 3,5-диэтил-4-гидроксибензонитрил
+      - 4-гидрокси-3,5-диэтилбензонитрил
 - canonical_smiles: CCC(C)C(C)(C)O
   source_ref: pubchem:cid:21019
   names:
@@ -17510,7 +17510,7 @@ entries:
       en:
       - 3-chloro-2-methylbut-1-ene
       ru:
-      - 3-хлоро-2-метилбут-1-ен
+      - 2-метил-3-хлоробут-1-ен
 - canonical_smiles: CC(C)CCOc1ccc(N)cc1
   source_ref: pubchem:cid:21262
   names:
