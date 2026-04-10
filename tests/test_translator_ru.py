@@ -13,7 +13,11 @@ def test_translate_keeps_common_functional_fragments() -> None:
 
 def test_translate_acid_and_aromatic_name() -> None:
     assert translate_iupac_en_to_ru("3-methylbutanoic acid") == "3-метилбутановая кислота"
-    assert translate_iupac_en_to_ru("1-ethyl-3-methylbenzene") == "1-этил-3-метилбензол"
+    assert translate_iupac_en_to_ru("1-ethyl-3-methylbenzene") == "3-метил-1-этилбензол"
+
+
+def test_translate_reorders_substituents_for_ru_alphabet() -> None:
+    assert translate_iupac_en_to_ru("2-ethyl-4-methylpentan-1-ol") == "4-метил-2-этилпентан-1-ол"
 
 
 def test_supported_ru_iupac_filter_rejects_untranslated_fragments() -> None:
