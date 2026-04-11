@@ -169,6 +169,15 @@ uv run ruff check src tests alembic
 uv run pytest
 ```
 
+## CI/CD
+
+В репозитории есть GitHub Actions для `CI` и `CD`.
+
+- `CI`: линтер, тесты, `docker compose config`, сборка Docker-образов
+- `CD`: selective build/push в `GHCR` и selective deploy на сервер по `SSH`
+
+Подробная схема и список нужных secrets: [docs/cicd.md](docs/cicd.md)
+
 ## Health endpoints
 
 - `/health/live`

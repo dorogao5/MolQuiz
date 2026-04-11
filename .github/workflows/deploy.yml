@@ -1,0 +1,237 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  PYTHON_VERSION: "3.12"
+  MOLQUIZ_ENV_FILE: .env.example
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      app_image_changed: ${{ steps.filter.outputs.app_image }}
+      app_redeploy: ${{ steps.flags.outputs.app_redeploy }}
+      opsin_image_changed: ${{ steps.filter.outputs.opsin_image }}
+      opsin_redeploy: ${{ steps.flags.outputs.opsin_redeploy }}
+      deploy_required: ${{ steps.flags.outputs.deploy_required }}
+      app_image_ref: ${{ steps.images.outputs.app_image_ref }}
+      opsin_image_ref: ${{ steps.images.outputs.opsin_image_ref }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed deployment surfaces
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            app_image:
+              - "Dockerfile"
+              - ".dockerignore"
+              - ".python-version"
+              - "pyproject.toml"
+              - "uv.lock"
+              - "alembic.ini"
+              - "alembic/**"
+              - "src/**"
+              - "data/**"
+            app_runtime:
+              - "docker-compose.yml"
+            opsin_image:
+              - "docker/opsin/**"
+            opsin_runtime:
+              - "docker-compose.yml"
+            deploy_repo:
+              - "scripts/deploy.sh"
+
+      - name: Compute image names
+        id: images
+        run: |
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          echo "app_image_ref=ghcr.io/${owner}/molquiz-app" >> "$GITHUB_OUTPUT"
+          echo "opsin_image_ref=ghcr.io/${owner}/molquiz-opsin" >> "$GITHUB_OUTPUT"
+
+      - name: Compute deployment flags
+        id: flags
+        run: |
+          app_redeploy=false
+          if [[ "${{ steps.filter.outputs.app_image }}" == "true" || "${{ steps.filter.outputs.app_runtime }}" == "true" ]]; then
+            app_redeploy=true
+          fi
+
+          opsin_redeploy=false
+          if [[ "${{ steps.filter.outputs.opsin_image }}" == "true" || "${{ steps.filter.outputs.opsin_runtime }}" == "true" ]]; then
+            opsin_redeploy=true
+          fi
+
+          deploy_required=false
+          if [[ "$app_redeploy" == "true" || "$opsin_redeploy" == "true" || "${{ steps.filter.outputs.deploy_repo }}" == "true" ]]; then
+            deploy_required=true
+          fi
+
+          echo "app_redeploy=$app_redeploy" >> "$GITHUB_OUTPUT"
+          echo "opsin_redeploy=$opsin_redeploy" >> "$GITHUB_OUTPUT"
+          echo "deploy_required=$deploy_required" >> "$GITHUB_OUTPUT"
+
+  quality:
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: uv sync --extra dev --frozen
+
+      - name: Lint
+        run: uv run ruff check src tests alembic
+
+      - name: Run tests
+        run: uv run pytest
+
+      - name: Validate docker compose configuration
+        run: docker compose config
+
+  publish_images:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare
+      - quality
+    if: ${{ needs.prepare.outputs.app_image_changed == 'true' || needs.prepare.outputs.opsin_image_changed == 'true' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Publish application image
+        if: ${{ needs.prepare.outputs.app_image_changed == 'true' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ needs.prepare.outputs.app_image_ref }}:${{ github.sha }}
+            ${{ needs.prepare.outputs.app_image_ref }}:main
+          cache-from: type=gha,scope=molquiz-app-release
+          cache-to: type=gha,mode=max,scope=molquiz-app-release
+
+      - name: Publish OPSIN image
+        if: ${{ needs.prepare.outputs.opsin_image_changed == 'true' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker/opsin
+          push: true
+          tags: |
+            ${{ needs.prepare.outputs.opsin_image_ref }}:${{ github.sha }}
+            ${{ needs.prepare.outputs.opsin_image_ref }}:main
+          cache-from: type=gha,scope=molquiz-opsin-release
+          cache-to: type=gha,mode=max,scope=molquiz-opsin-release
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    needs:
+      - prepare
+      - quality
+      - publish_images
+    if: >-
+      ${{
+        always() &&
+        needs.prepare.outputs.deploy_required == 'true' &&
+        needs.quality.result == 'success' &&
+        (needs.publish_images.result == 'success' || needs.publish_images.result == 'skipped')
+      }}
+
+    steps:
+      - name: Prepare SSH client
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Upload deploy environment
+        env:
+          DEPLOY_APP_PULL: ${{ needs.prepare.outputs.app_image_changed }}
+          DEPLOY_APP_RESTART: ${{ needs.prepare.outputs.app_redeploy }}
+          DEPLOY_APP_MIGRATE: ${{ needs.prepare.outputs.app_image_changed }}
+          DEPLOY_OPSIN_PULL: ${{ needs.prepare.outputs.opsin_image_changed }}
+          DEPLOY_OPSIN_RESTART: ${{ needs.prepare.outputs.opsin_redeploy }}
+          DEPLOY_APP_IMAGE: ${{ needs.prepare.outputs.app_image_ref }}:${{ github.sha }}
+          DEPLOY_OPSIN_IMAGE: ${{ needs.prepare.outputs.opsin_image_ref }}:${{ github.sha }}
+          DEPLOY_BRANCH: main
+          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        run: |
+          {
+            printf 'DEPLOY_BRANCH=%q\n' "$DEPLOY_BRANCH"
+            printf 'DEPLOY_APP_PULL=%q\n' "$DEPLOY_APP_PULL"
+            printf 'DEPLOY_APP_RESTART=%q\n' "$DEPLOY_APP_RESTART"
+            printf 'DEPLOY_APP_MIGRATE=%q\n' "$DEPLOY_APP_MIGRATE"
+            printf 'DEPLOY_OPSIN_PULL=%q\n' "$DEPLOY_OPSIN_PULL"
+            printf 'DEPLOY_OPSIN_RESTART=%q\n' "$DEPLOY_OPSIN_RESTART"
+
+            if [[ "$DEPLOY_APP_PULL" == "true" ]]; then
+              printf 'DEPLOY_APP_IMAGE=%q\n' "$DEPLOY_APP_IMAGE"
+            fi
+
+            if [[ "$DEPLOY_OPSIN_PULL" == "true" ]]; then
+              printf 'DEPLOY_OPSIN_IMAGE=%q\n' "$DEPLOY_OPSIN_IMAGE"
+            fi
+
+            if [[ -n "$GHCR_USERNAME" && -n "$GHCR_TOKEN" ]]; then
+              printf 'GHCR_USERNAME=%q\n' "$GHCR_USERNAME"
+              printf 'GHCR_TOKEN=%q\n' "$GHCR_TOKEN"
+            fi
+          } > deploy.env
+
+          scp -i ~/.ssh/id_ed25519 -P "${{ secrets.DEPLOY_SSH_PORT }}" deploy.env "${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }}:/tmp/molquiz-deploy.env"
+          rm -f deploy.env
+
+      - name: Run deploy script on server
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -p "${{ secrets.DEPLOY_SSH_PORT }}" "${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }}" '
+            set -euo pipefail
+            trap "rm -f /tmp/molquiz-deploy.env" EXIT
+            set -a
+            source /tmp/molquiz-deploy.env
+            set +a
+            cd /srv/MolQuiz
+            bash scripts/deploy.sh
+          '

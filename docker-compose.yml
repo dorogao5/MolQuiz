@@ -1,6 +1,23 @@
+name: molquiz
+
+x-app-base: &app-base
+  image: ${MOLQUIZ_APP_IMAGE:-molquiz-bot}
+  build:
+    context: .
+  env_file:
+    - ${MOLQUIZ_ENV_FILE:-.env}
+
+x-runtime-environment: &runtime-environment
+  MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
+  MOLQUIZ_REDIS_URL: redis://redis:6379/0
+  MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
+  MOLQUIZ_STORAGE_DIR: /app/storage
+  MOLQUIZ_ENVIRONMENT: production
+
 services:
   postgres:
     image: postgres:16-bookworm
+    restart: unless-stopped
     environment:
       POSTGRES_DB: molquiz
       POSTGRES_USER: molquiz
@@ -17,6 +34,7 @@ services:
 
   redis:
     image: redis:7-bookworm
+    restart: unless-stopped
     ports:
       - "127.0.0.1:${MOLQUIZ_REDIS_HOST_PORT:-16379}:6379"
     volumes:
@@ -28,8 +46,10 @@ services:
       retries: 5
 
   opsin:
+    image: ${MOLQUIZ_OPSIN_IMAGE:-molquiz-opsin}
     build:
       context: ./docker/opsin
+    restart: unless-stopped
     ports:
       - "127.0.0.1:${MOLQUIZ_OPSIN_HOST_PORT:-18080}:8080"
     healthcheck:
@@ -39,10 +59,7 @@ services:
       retries: 5
 
   migrate:
-    build:
-      context: .
-    env_file:
-      - .env
+    <<: *app-base
     environment:
       MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
       MOLQUIZ_ENVIRONMENT: production
@@ -52,17 +69,9 @@ services:
         condition: service_healthy
 
   bot:
-    build:
-      context: .
+    <<: *app-base
     restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
-      MOLQUIZ_REDIS_URL: redis://redis:6379/0
-      MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
-      MOLQUIZ_STORAGE_DIR: /app/storage
-      MOLQUIZ_ENVIRONMENT: production
+    environment: *runtime-environment
     command: ["uv", "run", "molquiz-dev"]
     depends_on:
       redis:
@@ -75,18 +84,10 @@ services:
       - storage_data:/app/storage
 
   bot-web:
-    build:
-      context: .
+    <<: *app-base
     restart: unless-stopped
     profiles: ["prod"]
-    env_file:
-      - .env
-    environment:
-      MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
-      MOLQUIZ_REDIS_URL: redis://redis:6379/0
-      MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
-      MOLQUIZ_STORAGE_DIR: /app/storage
-      MOLQUIZ_ENVIRONMENT: production
+    environment: *runtime-environment
     command: ["uv", "run", "molquiz-web"]
     depends_on:
       redis:
@@ -101,17 +102,9 @@ services:
       - storage_data:/app/storage
 
   worker:
-    build:
-      context: .
+    <<: *app-base
     restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      MOLQUIZ_DATABASE_URL: postgresql+asyncpg://molquiz:molquiz@postgres:5432/molquiz
-      MOLQUIZ_REDIS_URL: redis://redis:6379/0
-      MOLQUIZ_OPSIN_BASE_URL: http://opsin:8080
-      MOLQUIZ_STORAGE_DIR: /app/storage
-      MOLQUIZ_ENVIRONMENT: production
+    environment: *runtime-environment
     command: ["uv", "run", "molquiz-worker"]
     depends_on:
       redis:
@@ -126,6 +119,7 @@ services:
   caddy:
     image: caddy:2.8
     profiles: ["prod"]
+    restart: unless-stopped
     depends_on:
       - bot-web
     ports:
@@ -138,7 +132,12 @@ services:
 
 volumes:
   postgres_data:
+    name: molquiz_postgres_data
   redis_data:
+    name: molquiz_redis_data
   storage_data:
+    name: molquiz_storage_data
   caddy_data:
+    name: molquiz_caddy_data
   caddy_config:
+    name: molquiz_caddy_config

@@ -13,4 +13,4 @@ storage/
 data/review_exports/
 .DS_Store
 .env
-
+.env.deploy
