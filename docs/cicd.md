@@ -96,13 +96,10 @@
    - обновляет `.env.deploy` новыми image refs
 
 ## Что не делается автоматически
-
 - `molquiz-seed-full`
 - любые одноразовые data-fix команды
 - backup базы перед каждым deploy
-
 Это специально. Seed и ad hoc data migration не должны запускаться на каждый merge в `main`.
-
 ## Правило для миграций
 
 Миграции должны быть совместимыми с rolling restart на одном хосте:
